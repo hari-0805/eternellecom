@@ -6,7 +6,6 @@
 <title>Eternelle — Luxury Event Crafters</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 :root {
@@ -25,268 +24,130 @@ body {
   cursor: none;
 }
 
-/* ===== CURSOR ===== */
-.cursor {
-  width: 8px; height: 8px; background: var(--gold); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-}
-.cursor-ring {
-  width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998;
-  opacity: 0.6; transition: width 0.3s, height 0.3s, opacity 0.3s;
-}
+/* CURSOR */
+.cursor { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
+.cursor-ring { width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; opacity: 0.6; transition: width 0.3s, height 0.3s, opacity 0.3s; }
 
-/* ===== NAV ===== */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.5rem 4rem;
-  background: linear-gradient(to bottom, rgba(26,20,16,0.97), transparent);
-  transition: background 0.4s;
-}
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 4rem; background: linear-gradient(to bottom, rgba(26,20,16,0.97), transparent); transition: background 0.4s; }
 nav.scrolled { background: rgba(26,20,16,0.99); }
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300;
-  color: var(--gold); letter-spacing: 0.08em; text-decoration: none;
-}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); letter-spacing: 0.08em; text-decoration: none; }
 .nav-logo em { font-style: italic; }
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-.nav-links a {
-  color: var(--ivory); text-decoration: none; font-size: 0.68rem;
-  letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7;
-  transition: opacity 0.3s, color 0.3s; cursor: none;
-}
+.nav-links a { color: var(--ivory); text-decoration: none; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.3s, color 0.3s; cursor: none; }
 .nav-links a:hover { opacity: 1; color: var(--gold); }
-.nav-cta {
-  border: 1px solid var(--gold) !important; color: var(--gold) !important;
-  padding: 0.5rem 1.4rem; opacity: 1 !important;
-  transition: background 0.3s !important;
-}
+.nav-cta { border: 1px solid var(--gold) !important; color: var(--gold) !important; padding: 0.5rem 1.4rem; opacity: 1 !important; transition: background 0.3s !important; }
 .nav-cta:hover { background: var(--gold); color: var(--dark) !important; }
 
-/* ===== HERO ===== */
-.hero {
-  height: 100vh; min-height: 600px; position: relative;
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 80%, rgba(196,121,106,0.08) 0%, transparent 50%),
-    linear-gradient(135deg, #1a1410 0%, #2d2318 50%, #1a1410 100%);
-}
-.hero-grid {
-  position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(90deg, rgba(201,169,110,0.04) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(201,169,110,0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-.orb {
-  position: absolute; border-radius: 50%;
-  filter: blur(80px); pointer-events: none;
-  animation: floatOrb 8s ease-in-out infinite;
-}
+/* HERO */
+.hero { height: 100vh; min-height: 600px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(201,169,110,0.12) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(196,121,106,0.08) 0%, transparent 50%), linear-gradient(135deg, #1a1410 0%, #2d2318 50%, #1a1410 100%); }
+.hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(90deg, rgba(201,169,110,0.04) 1px, transparent 1px), linear-gradient(0deg, rgba(201,169,110,0.04) 1px, transparent 1px); background-size: 80px 80px; }
+.orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: floatOrb 8s ease-in-out infinite; }
 .orb-1 { width: 500px; height: 500px; background: rgba(201,169,110,0.06); top: -100px; right: -100px; }
 .orb-2 { width: 300px; height: 300px; background: rgba(196,121,106,0.07); bottom: 100px; left: 50px; animation-delay: -3s; }
 .orb-3 { width: 200px; height: 200px; background: rgba(138,158,140,0.06); top: 200px; left: 30%; animation-delay: -5s; }
-@keyframes floatOrb {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-28px) scale(1.05); }
-}
-.hero-content {
-  text-align: center; position: relative; z-index: 2;
-  max-width: 880px; padding: 6rem 2rem 2rem;
-  display: flex; flex-direction: column; align-items: center;
-}
-.hero-eyebrow {
-  font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.2rem;
-  display: flex; align-items: center; gap: 1.2rem;
-  opacity: 0; animation: fadeUp 0.9s 0.3s forwards;
-}
-.hero-eyebrow::before, .hero-eyebrow::after {
-  content: ''; width: 50px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0;
-}
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 6vw, 6rem);
-  font-weight: 300; line-height: 1.15; letter-spacing: -0.01em;
-  opacity: 0; animation: fadeUp 1.1s 0.6s forwards;
-}
+@keyframes floatOrb { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-28px) scale(1.05); } }
+.hero-content { text-align: center; position: relative; z-index: 2; max-width: 880px; padding: 6rem 2rem 2rem; display: flex; flex-direction: column; align-items: center; }
+.hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 1.2rem; opacity: 0; animation: fadeUp 0.9s 0.3s forwards; }
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 50px; height: 1px; background: var(--gold); opacity: 0.5; flex-shrink: 0; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 6vw, 6rem); font-weight: 300; line-height: 1.15; letter-spacing: -0.01em; opacity: 0; animation: fadeUp 1.1s 0.6s forwards; }
 .hero-title em { font-style: italic; color: var(--gold); display: block; }
-.hero-sub {
-  font-size: 0.75rem; letter-spacing: 0.12em; color: rgba(250,246,240,0.5);
-  max-width: 420px; margin-top: 1.5rem; line-height: 2;
-  opacity: 0; animation: fadeUp 0.9s 1s forwards;
-}
-.hero-actions {
-  margin-top: 2rem; display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.9s 1.3s forwards;
-}
-.btn-primary {
-  background: var(--gold); color: var(--dark); padding: 0.9rem 2.4rem;
-  font-family: 'Josefin Sans', sans-serif; font-size: 0.63rem;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  border: none; cursor: none; text-decoration: none; display: inline-block;
-  transition: background 0.3s, transform 0.2s;
-}
+.hero-sub { font-size: 0.75rem; letter-spacing: 0.12em; color: rgba(250,246,240,0.5); max-width: 420px; margin-top: 1.5rem; line-height: 2; opacity: 0; animation: fadeUp 0.9s 1s forwards; }
+.hero-actions { margin-top: 2rem; display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s 1.3s forwards; }
+.btn-primary { background: var(--gold); color: var(--dark); padding: 0.9rem 2.4rem; font-family: 'Josefin Sans', sans-serif; font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; border: none; cursor: none; text-decoration: none; display: inline-block; transition: background 0.3s, transform 0.2s; }
 .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-.btn-ghost {
-  color: var(--ivory); padding: 0.9rem 2.4rem;
-  font-family: 'Josefin Sans', sans-serif; font-size: 0.63rem;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  border: 1px solid rgba(250,246,240,0.3);
-  cursor: none; text-decoration: none; display: inline-block;
-  transition: border-color 0.3s, color 0.3s;
-}
+.btn-ghost { color: var(--ivory); padding: 0.9rem 2.4rem; font-family: 'Josefin Sans', sans-serif; font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; border: 1px solid rgba(250,246,240,0.3); cursor: none; text-decoration: none; display: inline-block; transition: border-color 0.3s, color 0.3s; }
 .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-.scroll-hint {
-  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
-  opacity: 0; animation: fadeUp 0.9s 2s forwards;
-}
-.scroll-hint span {
-  font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(250,246,240,0.35);
-}
+.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.7rem; opacity: 0; animation: fadeUp 0.9s 2s forwards; }
+.scroll-hint span { font-size: 0.52rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(250,246,240,0.35); }
 .scroll-line-wrap { width: 1px; height: 50px; overflow: hidden; }
-.scroll-line {
-  width: 1px; height: 100%;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollDown 2s ease-in-out infinite;
-}
-@keyframes scrollDown {
-  0%   { opacity: 0; transform: translateY(-100%); }
-  40%  { opacity: 1; }
-  80%  { opacity: 1; }
-  100% { opacity: 0; transform: translateY(100%); }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+.scroll-line { width: 1px; height: 100%; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollDown 2s ease-in-out infinite; }
+@keyframes scrollDown { 0% { opacity: 0; transform: translateY(-100%); } 40% { opacity: 1; } 80% { opacity: 1; } 100% { opacity: 0; transform: translateY(100%); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ===== MARQUEE ===== */
+/* MARQUEE */
 .marquee-wrap { overflow: hidden; background: var(--gold); padding: 0.9rem 0; }
-.marquee-track { display: flex; width: max-content; animation: marquee 22s linear infinite; }
-.marquee-item {
-  font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--dark); padding: 0 2.5rem; white-space: nowrap; font-weight: 400;
-}
+.marquee-track { display: flex; width: max-content; animation: marquee 25s linear infinite; }
+.marquee-item { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--dark); padding: 0 2.5rem; white-space: nowrap; font-weight: 400; }
 .marquee-sep { color: rgba(26,20,16,0.4); }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ===== SECTION BASE ===== */
+/* SECTION BASE */
 section { padding: 7rem 4rem; position: relative; }
-.section-label {
-  font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.2rem;
-  display: flex; align-items: center; gap: 0.9rem;
-}
+.section-label { font-size: 0.58rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.9rem; }
 .section-label::after { content: ''; flex: 0 0 36px; height: 1px; background: var(--gold); }
-h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.15;
-}
+h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.15; }
 h2 em { font-style: italic; color: var(--gold); }
 .gold-line { width: 70px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin: 1.8rem 0; }
 
-/* ===== ABOUT ===== */
-.about-wrap {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
-}
+/* ABOUT */
+.about-wrap { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .about-visual { position: relative; aspect-ratio: 3/4; }
-.about-frame {
-  position: absolute; inset: 0;
-  border: 1px solid rgba(201,169,110,0.2);
-  background: linear-gradient(135deg, var(--dark2), #3d3020);
-  display: flex; align-items: center; justify-content: center; overflow: hidden;
-}
-.about-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 40% 40%, rgba(201,169,110,0.12), transparent 65%);
-}
-.about-frame-art { position: relative; z-index: 1; text-align: center; }
-.about-frame-art svg { opacity: 0.28; display: block; margin: 0 auto; }
-.about-frame-art .art-label {
-  font-family: 'Cormorant Garamond', serif; font-size: 1rem;
-  color: rgba(201,169,110,0.5); font-style: italic; letter-spacing: 0.12em; margin-top: 1rem;
-}
-.corner { position: absolute; width: 44px; height: 44px; border-color: var(--gold); border-style: solid; opacity: 0.35; }
+.about-frame { position: absolute; inset: 0; border: 1px solid rgba(201,169,110,0.2); overflow: hidden; }
+.about-frame img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75) sepia(0.2); }
+.about-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.6) 0%, transparent 50%); }
+.corner { position: absolute; width: 44px; height: 44px; border-color: var(--gold); border-style: solid; opacity: 0.5; z-index: 2; }
 .corner.tl { top: -8px; left: -8px; border-width: 1px 0 0 1px; }
 .corner.br { bottom: -8px; right: -8px; border-width: 0 1px 1px 0; }
-.about-text p {
-  font-size: 0.82rem; line-height: 2.1; color: rgba(250,246,240,0.62);
-  margin-bottom: 1.4rem; letter-spacing: 0.02em;
-}
-.about-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;
-  margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(201,169,110,0.15);
-}
-.stat-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--gold); line-height: 1;
-}
+.about-text p { font-size: 0.82rem; line-height: 2.1; color: rgba(250,246,240,0.62); margin-bottom: 1.4rem; letter-spacing: 0.02em; }
+.about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(201,169,110,0.15); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 300; color: var(--gold); line-height: 1; }
 .stat-label { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,246,240,0.38); margin-top: 0.4rem; }
 
-/* ===== SERVICES ===== */
+/* SERVICES */
 .services-bg { background: var(--dark2); }
-.services-header { text-align: center; max-width: 560px; margin: 0 auto 4rem; }
+.services-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
 .services-header p { font-size: 0.78rem; line-height: 2; color: rgba(250,246,240,0.48); margin-top: 1.2rem; }
-.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1200px; margin: 0 auto; }
-.svc-card {
-  position: relative; padding: 3rem 2.2rem;
-  background: rgba(26,20,16,0.65); overflow: hidden;
-  transition: background 0.4s; cursor: none;
-}
-.svc-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(201,169,110,0.06), transparent);
-  opacity: 0; transition: opacity 0.4s;
-}
-.svc-card:hover::before { opacity: 1; }
-.svc-card:hover { background: rgba(45,35,24,0.9); }
-.svc-num {
-  font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300;
-  color: rgba(201,169,110,0.07); line-height: 1;
-  position: absolute; top: 1.2rem; right: 1.8rem; transition: color 0.4s; user-select: none;
-}
-.svc-card:hover .svc-num { color: rgba(201,169,110,0.14); }
-.svc-icon { width: 44px; height: 44px; margin-bottom: 1.6rem; color: var(--gold); }
-.svc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 0.9rem; color: var(--ivory); }
-.svc-desc { font-size: 0.73rem; line-height: 2; color: rgba(250,246,240,0.48); }
-.svc-link {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  margin-top: 1.8rem; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); text-decoration: none;
-  opacity: 0; transform: translateX(-8px); transition: opacity 0.3s, transform 0.3s;
-}
-.svc-card:hover .svc-link { opacity: 1; transform: translateX(0); }
-.svc-link::after { content: '→'; }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; max-width: 1300px; margin: 0 auto; }
 
-/* ===== PROCESS ===== */
+/* SERVICE CARD WITH PHOTO */
+.svc-card {
+  position: relative; overflow: hidden;
+  cursor: none; aspect-ratio: 3/4;
+  min-height: 380px;
+}
+.svc-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.45) saturate(0.8); }
+.svc-card:hover .svc-photo { transform: scale(1.08); filter: brightness(0.35) saturate(0.7); }
+.svc-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.95) 0%, rgba(26,20,16,0.4) 50%, transparent 100%); transition: background 0.4s; }
+.svc-card:hover .svc-overlay { background: linear-gradient(to top, rgba(45,35,24,0.98) 0%, rgba(26,20,16,0.65) 60%, rgba(26,20,16,0.2) 100%); }
+.svc-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.8rem; }
+.svc-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: rgba(201,169,110,0.15); line-height: 1; position: absolute; top: 1rem; right: 1.5rem; user-select: none; transition: color 0.4s; }
+.svc-card:hover .svc-num { color: rgba(201,169,110,0.25); }
+.svc-icon { width: 36px; height: 36px; margin-bottom: 1rem; color: var(--gold); }
+.svc-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0; color: var(--ivory); transition: margin 0.3s; }
+.svc-desc { font-size: 0.7rem; line-height: 1.9; color: rgba(250,246,240,0.65); max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.3s; }
+.svc-card:hover .svc-desc { max-height: 120px; margin-top: 0.7rem; }
+.svc-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-decoration: none; opacity: 0; transform: translateY(6px); transition: opacity 0.3s, transform 0.3s; }
+.svc-card:hover .svc-link { opacity: 1; transform: translateY(0); }
+.svc-link::after { content: '->'; }
+
+/* PHOTO SHOWCASE */
+.showcase-bg { background: var(--dark); padding: 0 !important; }
+.showcase-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 340px 340px; gap: 3px; }
+.showcase-item { position: relative; overflow: hidden; cursor: none; }
+.showcase-item.tall { grid-row: span 2; }
+.showcase-item.wide { grid-column: span 2; }
+.showcase-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.7) saturate(0.85); }
+.showcase-item:hover .showcase-img { transform: scale(1.05); filter: brightness(0.55) saturate(0.75); }
+.showcase-label { position: absolute; bottom: 1.5rem; left: 1.8rem; }
+.showcase-tag { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+.showcase-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s; }
+.showcase-item:hover .showcase-title { opacity: 1; transform: translateY(0); }
+.showcase-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.7) 0%, transparent 60%); }
+
+/* PROCESS */
 .process-inner { max-width: 1200px; margin: 0 auto; }
 .process-header { text-align: center; max-width: 500px; margin: 0 auto 4rem; }
 .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
-.process-steps::before {
-  content: ''; position: absolute; top: 24px; left: 12.5%; right: 12.5%;
-  height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent);
-}
+.process-steps::before { content: ''; position: absolute; top: 24px; left: 12.5%; right: 12.5%; height: 1px; background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), transparent); }
 .process-step { padding: 2.5rem 1.8rem; text-align: center; }
-.step-circle {
-  width: 48px; height: 48px; border: 1px solid rgba(201,169,110,0.3); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 1.8rem; background: var(--dark); position: relative; z-index: 1;
-}
+.step-circle { width: 48px; height: 48px; border: 1px solid rgba(201,169,110,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.8rem; background: var(--dark); position: relative; z-index: 1; }
 .step-num-label { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--gold); font-weight: 300; }
 .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 0.8rem; }
 .step-desc { font-size: 0.68rem; line-height: 2; color: rgba(250,246,240,0.42); }
 
-/* ===== GALLERY ===== */
+/* GALLERY */
 .gallery-bg { background: var(--dark2); padding: 7rem 0 !important; }
 .gallery-header { text-align: center; padding: 0 4rem; margin-bottom: 3.5rem; }
 .gallery-header .section-label { justify-content: center; }
@@ -297,30 +158,14 @@ h2 em { font-style: italic; color: var(--gold); }
 .gallery-item { flex: 0 0 280px; aspect-ratio: 2/3; position: relative; overflow: hidden; cursor: none; }
 .gallery-item:nth-child(2) { margin-top: 2.5rem; }
 .gallery-item:nth-child(4) { margin-top: -2.5rem; }
-.gallery-art-block {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; transition: transform 0.6s ease;
-}
-.gallery-item:hover .gallery-art-block { transform: scale(1.04); }
-.g1 { background: linear-gradient(135deg, #3d2e20, #6b4e35, #3d2e20); }
-.g2 { background: linear-gradient(160deg, #2a3d2e, #4a6b50, #2a3d2e); }
-.g3 { background: linear-gradient(120deg, #3d2a38, #6b4060, #3d2a38); }
-.g4 { background: linear-gradient(145deg, #2e3540, #4a5d70, #2e3540); }
-.g5 { background: linear-gradient(135deg, #3d2e2a, #7a5548, #3d2e2a); }
-.gallery-art-inner { position: relative; z-index: 2; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.gallery-glow { position: absolute; border-radius: 50%; filter: blur(35px); width: 160px; height: 160px; opacity: 0.25; }
-.gallery-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(26,20,16,0.88) 0%, transparent 55%);
-  display: flex; flex-direction: column; justify-content: flex-end; padding: 1.8rem;
-  opacity: 0; transition: opacity 0.4s;
-}
+.gallery-photo { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.7) saturate(0.85); }
+.gallery-item:hover .gallery-photo { transform: scale(1.05); }
+.gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,20,16,0.9) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.8rem; opacity: 0; transition: opacity 0.4s; }
 .gallery-item:hover .gallery-overlay { opacity: 1; }
 .g-tag { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
 .g-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; }
 
-/* ===== TESTIMONIALS ===== */
+/* TESTIMONIALS */
 .testi-wrap { max-width: 900px; margin: 0 auto; text-align: center; }
 .testi-wrap .section-label { justify-content: center; }
 .testi-wrap .section-label::before { content: ''; flex: 0 0 36px; height: 1px; background: var(--gold); }
@@ -329,58 +174,34 @@ h2 em { font-style: italic; color: var(--gold); }
 .testi { display: none; animation: fadeIn 0.5s ease; }
 .testi.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.testi-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.3rem, 2.8vw, 1.9rem);
-  font-weight: 300; font-style: italic; line-height: 1.7; color: var(--ivory);
-  max-width: 720px; margin: 0 auto;
-}
+.testi-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem, 2.8vw, 1.9rem); font-weight: 300; font-style: italic; line-height: 1.7; color: var(--ivory); max-width: 720px; margin: 0 auto; }
 .testi-author { margin-top: 2rem; font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
 .testi-occasion { font-size: 0.58rem; color: rgba(250,246,240,0.32); letter-spacing: 0.1em; margin-top: 0.3rem; }
 .testi-dots { display: flex; gap: 0.7rem; justify-content: center; margin-top: 2.5rem; }
 .dot { width: 6px; height: 6px; background: rgba(201,169,110,0.28); border-radius: 50%; cursor: pointer; transition: background 0.3s, transform 0.3s; }
 .dot.active { background: var(--gold); transform: scale(1.4); }
 
-/* ===== PACKAGES ===== */
+/* PACKAGES */
 .pkg-bg { background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 100%); }
 .pkg-header { text-align: center; margin-bottom: 4rem; }
 .pkg-header p { font-size: 0.78rem; color: rgba(250,246,240,0.45); max-width: 380px; margin: 1.2rem auto 0; line-height: 2; }
 .pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1100px; margin: 0 auto; }
-.pkg-card {
-  padding: 3rem 2.2rem; background: rgba(26,20,16,0.75);
-  position: relative; overflow: hidden; transition: transform 0.35s; cursor: none;
-}
+.pkg-card { padding: 3rem 2.2rem; background: rgba(26,20,16,0.75); position: relative; overflow: hidden; transition: transform 0.35s; cursor: none; }
 .pkg-card:hover { transform: translateY(-5px); }
-.pkg-card.featured {
-  background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(201,169,110,0.04));
-  border: 1px solid rgba(201,169,110,0.28);
-}
-.pkg-badge {
-  position: absolute; top: 1.8rem; right: 1.8rem;
-  font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--dark); background: var(--gold); padding: 0.25rem 0.7rem;
-}
+.pkg-card.featured { background: linear-gradient(135deg, rgba(201,169,110,0.1), rgba(201,169,110,0.04)); border: 1px solid rgba(201,169,110,0.28); }
+.pkg-badge { position: absolute; top: 1.8rem; right: 1.8rem; font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dark); background: var(--gold); padding: 0.25rem 0.7rem; }
 .pkg-tier { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
 .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.4rem; }
 .pkg-price { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: rgba(250,246,240,0.38); margin-bottom: 2rem; font-style: italic; }
 .pkg-divider { height: 1px; background: rgba(201,169,110,0.14); margin-bottom: 1.8rem; }
 .pkg-features { list-style: none; }
-.pkg-features li {
-  font-size: 0.7rem; padding: 0.6rem 0; color: rgba(250,246,240,0.58);
-  display: flex; align-items: center; gap: 0.7rem;
-  border-bottom: 1px solid rgba(201,169,110,0.07);
-}
-.pkg-features li::before { content: '◈'; color: var(--gold); font-size: 0.48rem; flex-shrink: 0; }
-.pkg-cta {
-  display: block; text-align: center; margin-top: 2rem; padding: 0.9rem;
-  border: 1px solid rgba(201,169,110,0.28);
-  font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); text-decoration: none; transition: background 0.3s, color 0.3s;
-}
+.pkg-features li { font-size: 0.7rem; padding: 0.6rem 0; color: rgba(250,246,240,0.58); display: flex; align-items: center; gap: 0.7rem; border-bottom: 1px solid rgba(201,169,110,0.07); }
+.pkg-features li::before { content: 'o'; color: var(--gold); font-size: 0.48rem; flex-shrink: 0; }
+.pkg-cta { display: block; text-align: center; margin-top: 2rem; padding: 0.9rem; border: 1px solid rgba(201,169,110,0.28); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: background 0.3s, color 0.3s; }
 .pkg-cta:hover { background: var(--gold); color: var(--dark); }
 .pkg-card.featured .pkg-cta { background: var(--gold); color: var(--dark); }
 
-/* ===== CONTACT ===== */
+/* CONTACT */
 .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; }
 .contact-left { padding: 5rem 4rem; background: var(--dark2); }
 .contact-left h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.9rem; }
@@ -390,49 +211,23 @@ h2 em { font-style: italic; color: var(--gold); }
 .c-label { font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(250,246,240,0.32); margin-bottom: 0.2rem; }
 .c-val { font-size: 0.78rem; color: var(--ivory); }
 .social-row { display: flex; gap: 0.9rem; margin-top: 2.5rem; }
-.social-btn {
-  width: 34px; height: 34px; border: 1px solid rgba(201,169,110,0.2);
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(201,169,110,0.48); text-decoration: none; font-size: 0.65rem;
-  transition: border-color 0.3s, color 0.3s; cursor: none;
-}
+.social-btn { width: 34px; height: 34px; border: 1px solid rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; color: rgba(201,169,110,0.48); text-decoration: none; font-size: 0.65rem; transition: border-color 0.3s, color 0.3s; cursor: none; }
 .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 .contact-right { padding: 5rem 4rem; background: rgba(201,169,110,0.04); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .form-group { margin-bottom: 1.5rem; }
-.form-group label {
-  display: block; font-size: 0.57rem; letter-spacing: 0.18em;
-  text-transform: uppercase; color: rgba(250,246,240,0.38); margin-bottom: 0.6rem;
-}
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%; padding: 0.85rem 1.1rem;
-  background: rgba(26,20,16,0.7); border: 1px solid rgba(201,169,110,0.15);
-  color: var(--ivory); font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.78rem; font-weight: 200; outline: none; cursor: none;
-  transition: border-color 0.3s;
-}
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus { border-color: rgba(201,169,110,0.5); }
+.form-group label { display: block; font-size: 0.57rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,246,240,0.38); margin-bottom: 0.6rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.85rem 1.1rem; background: rgba(26,20,16,0.7); border: 1px solid rgba(201,169,110,0.15); color: var(--ivory); font-family: 'Josefin Sans', sans-serif; font-size: 0.78rem; font-weight: 200; outline: none; cursor: none; transition: border-color 0.3s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(201,169,110,0.5); }
 .form-group select { appearance: none; background-color: rgba(26,20,16,0.7); }
 .form-group select option { background: #2d2318; color: var(--ivory); }
 .form-group textarea { resize: none; height: 110px; }
-.form-submit {
-  width: 100%; padding: 1rem; background: var(--gold); color: var(--dark);
-  border: none; cursor: none; font-family: 'Josefin Sans', sans-serif;
-  font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
-  transition: background 0.3s, transform 0.2s; margin-top: 0.4rem;
-}
+.form-submit { width: 100%; padding: 1rem; background: var(--gold); color: var(--dark); border: none; cursor: none; font-family: 'Josefin Sans', sans-serif; font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; transition: background 0.3s, transform 0.2s; margin-top: 0.4rem; }
 .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
-.footer-top {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3.5rem;
-  padding-bottom: 2.5rem; border-bottom: 1px solid rgba(201,169,110,0.1);
-}
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(201,169,110,0.1); }
 .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--gold); font-weight: 300; margin-bottom: 0.9rem; }
 .footer-logo em { font-style: italic; }
 .footer-desc { font-size: 0.7rem; line-height: 2; color: rgba(250,246,240,0.3); max-width: 240px; }
@@ -445,17 +240,22 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
 .footer-copy { font-size: 0.6rem; color: rgba(250,246,240,0.22); letter-spacing: 0.08em; }
 .footer-motto { font-size: 0.58rem; letter-spacing: 0.18em; color: rgba(201,169,110,0.28); }
 
-/* ===== REVEAL ===== */
+/* REVEAL */
 .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.75s ease, transform 0.75s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .showcase-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 280px; }
+  .showcase-item.tall { grid-row: span 1; }
+  .showcase-item.wide { grid-column: span 2; }
+}
 @media (max-width: 1024px) {
   nav { padding: 1.4rem 2.5rem; }
   section { padding: 5rem 2.5rem; }
   .about-wrap { grid-template-columns: 1fr; }
   .about-visual { display: none; }
-  .services-grid { grid-template-columns: 1fr 1fr; }
   .process-steps { grid-template-columns: 1fr 1fr; }
   .process-steps::before { display: none; }
   .pkg-grid { grid-template-columns: 1fr; max-width: 420px; }
@@ -468,7 +268,9 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
   .nav-links { display: none; }
   section { padding: 4rem 1.5rem; }
   .services-grid { grid-template-columns: 1fr; }
-  .gallery-item { flex: 0 0 230px; }
+  .showcase-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+  .showcase-item.wide { grid-column: span 1; }
+  .gallery-item { flex: 0 0 220px; }
   .footer-top { grid-template-columns: 1fr; }
   .contact-left, .contact-right { padding: 3rem 1.5rem; }
 }
@@ -476,7 +278,6 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -521,24 +322,26 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">Weddings <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Receptions <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Engagements <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Anniversary Galas <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Luxury Decor <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Gourmet Catering <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Cinematic Photography <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Floral Artistry <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Live Entertainment <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Weddings <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Receptions <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Engagements <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Anniversary Galas <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Luxury Decor <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Gourmet Catering <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Cinematic Photography <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Floral Artistry <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Live Entertainment <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Weddings <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Receptions <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Bridal Makeup <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Garlands <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Luxury Decor <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Gourmet Catering <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Cinematic Photography <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">DJ Entertainment <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Floral Artistry <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Engagements <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Weddings <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Receptions <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Bridal Makeup <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Garlands <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Luxury Decor <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Gourmet Catering <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Cinematic Photography <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">DJ Entertainment <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Floral Artistry <span class="marquee-sep">*</span></span>
+    <span class="marquee-item">Engagements <span class="marquee-sep">*</span></span>
   </div>
 </div>
 
@@ -547,19 +350,7 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
   <div class="about-wrap">
     <div class="about-visual reveal">
       <div class="about-frame">
-        <div class="about-frame-art">
-          <svg width="260" height="260" viewBox="0 0 260 260" fill="none">
-            <circle cx="130" cy="130" r="115" stroke="rgba(201,169,110,0.35)" stroke-width="0.5"/>
-            <circle cx="130" cy="130" r="85" stroke="rgba(201,169,110,0.25)" stroke-width="0.5"/>
-            <circle cx="130" cy="130" r="55" stroke="rgba(201,169,110,0.18)" stroke-width="0.5"/>
-            <line x1="130" y1="15" x2="130" y2="245" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
-            <line x1="15" y1="130" x2="245" y2="130" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
-            <line x1="48" y1="48" x2="212" y2="212" stroke="rgba(201,169,110,0.1)" stroke-width="0.5"/>
-            <line x1="212" y1="48" x2="48" y2="212" stroke="rgba(201,169,110,0.1)" stroke-width="0.5"/>
-            <text x="130" y="148" text-anchor="middle" font-family="Georgia,serif" font-size="52" fill="rgba(201,169,110,0.35)">&#10022;</text>
-          </svg>
-          <div class="art-label">Since 2018</div>
-        </div>
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Elegant wedding ceremony" loading="lazy">
       </div>
       <div class="corner tl"></div>
       <div class="corner br"></div>
@@ -568,8 +359,8 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
       <div class="section-label">Our Story</div>
       <h2>Crafting <em>Unforgettable</em> Celebrations</h2>
       <div class="gold-line"></div>
-      <p>At Eternelle, we believe every love story is singular and every celebration should reflect that uniqueness. We are not merely event planners; we are architects of memory, weavers of atmosphere, and orchestrators of emotion.</p>
-      <p>From intimate garden weddings to grand ballroom galas, our team handles every detail with white-glove precision: breathtaking decor, curated cuisine, and cinematic photography that captures the soul of your moment.</p>
+      <p>At Eternelle, we believe every love story is singular and every celebration should reflect that uniqueness. We are not merely event planners — we are architects of memory, weavers of atmosphere, and orchestrators of emotion.</p>
+      <p>From intimate garden weddings to grand ballroom galas, our team handles every detail with white-glove precision: breathtaking decor, bridal makeup, sacred garlands, curated cuisine, cinematic photography, and live DJ entertainment.</p>
       <p>Based in Chennai, serving across India. Every event is a masterpiece in the making.</p>
       <div class="about-stats">
         <div><div class="stat-num">500+</div><div class="stat-label">Events Crafted</div></div>
@@ -584,77 +375,204 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
 <section id="services" class="services-bg">
   <div class="services-header reveal">
     <div class="section-label" style="justify-content:center;">What We Offer</div>
-    <h2>Six Pillars of <em>Perfection</em></h2>
+    <h2>Eight Pillars of <em>Perfection</em></h2>
     <p>Every element of your celebration is curated, customized, and executed with obsessive attention to detail.</p>
   </div>
   <div class="services-grid">
+
+    <!-- 01 DECOR -->
     <div class="svc-card reveal">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&q=80" alt="Wedding Decor" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">01</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M24 4L44 14V34L24 44L4 34V14Z"/>
-        <circle cx="24" cy="24" r="7"/>
-        <line x1="24" y1="17" x2="24" y2="9"/><line x1="24" y1="31" x2="24" y2="39"/>
-        <line x1="17" y1="24" x2="9" y2="24"/><line x1="31" y1="24" x2="39" y2="24"/>
-      </svg>
-      <div class="svc-title">Bespoke Decor</div>
-      <p class="svc-desc">Every table, every arch, every petal designed around your palette and vision. We transform venues into living art installations.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M24 4L44 14V34L24 44L4 34V14Z"/>
+          <circle cx="24" cy="24" r="7"/>
+          <line x1="24" y1="17" x2="24" y2="9"/><line x1="24" y1="31" x2="24" y2="39"/>
+          <line x1="17" y1="24" x2="9" y2="24"/><line x1="31" y1="24" x2="39" y2="24"/>
+        </svg>
+        <div class="svc-title">Bespoke Decor</div>
+        <p class="svc-desc">Every table, every arch, every petal designed around your palette and vision. We transform venues into living art installations you will never want to leave.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
     </div>
-    <div class="svc-card reveal" style="transition-delay:0.1s">
+
+    <!-- 02 PHOTOGRAPHY -->
+    <div class="svc-card reveal" style="transition-delay:0.08s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600&q=80" alt="Wedding Photography" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">02</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <rect x="6" y="12" width="36" height="26" rx="1"/>
-        <circle cx="24" cy="25" r="7"/>
-        <circle cx="24" cy="25" r="3"/>
-        <rect x="18" y="7" width="12" height="5" rx="1"/>
-      </svg>
-      <div class="svc-title">Cinematic Photography</div>
-      <p class="svc-desc">Our award-winning photographers tell your story with artistic vision, creating heirlooms you will treasure across generations.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="6" y="12" width="36" height="26" rx="1"/>
+          <circle cx="24" cy="25" r="7"/>
+          <circle cx="24" cy="25" r="3"/>
+          <rect x="18" y="7" width="12" height="5" rx="1"/>
+        </svg>
+        <div class="svc-title">Cinematic Photography</div>
+        <p class="svc-desc">Our award-winning photographers and videographers tell your story with artistic vision, creating heirlooms you will treasure across generations.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
     </div>
-    <div class="svc-card reveal" style="transition-delay:0.2s">
+
+    <!-- 03 CATERING -->
+    <div class="svc-card reveal" style="transition-delay:0.16s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&q=80" alt="Gourmet Catering" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">03</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M8 36C8 28 14 20 24 18C34 20 40 28 40 36Z"/>
-        <path d="M16 18C16 12 20 8 24 8C28 8 32 12 32 18"/>
-        <line x1="24" y1="36" x2="24" y2="42"/>
-        <line x1="16" y1="42" x2="32" y2="42"/>
-      </svg>
-      <div class="svc-title">Gourmet Catering</div>
-      <p class="svc-desc">From traditional feasts to fusion cuisines, our culinary artisans craft bespoke menus that delight every palate. Multi-course to live stations.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M8 36C8 28 14 20 24 18C34 20 40 28 40 36Z"/>
+          <path d="M16 18C16 12 20 8 24 8C28 8 32 12 32 18"/>
+          <line x1="24" y1="36" x2="24" y2="42"/>
+          <line x1="16" y1="42" x2="32" y2="42"/>
+        </svg>
+        <div class="svc-title">Gourmet Catering</div>
+        <p class="svc-desc">From traditional South Indian feasts to fusion cuisines, our culinary artisans craft bespoke menus. Multi-course dining to live food stations.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
     </div>
-    <div class="svc-card reveal" style="transition-delay:0.1s">
+
+    <!-- 04 DJ -->
+    <div class="svc-card reveal" style="transition-delay:0.24s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1516873240891-4bf014598ab4?w=600&q=80" alt="DJ Entertainment" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">04</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <path d="M24 6L27.5 17H40L30 24.5L33.5 36L24 29L14.5 36L18 24.5L8 17H20.5Z"/>
-      </svg>
-      <div class="svc-title">Floral Artistry</div>
-      <p class="svc-desc">Seasonal blooms crafted into sculptures of beauty. Centerpieces, mandaps, canopies, and ceremonial arrangements that breathe life into your space.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="14" cy="34" r="6"/>
+          <circle cx="34" cy="30" r="6"/>
+          <circle cx="14" cy="34" r="2"/>
+          <circle cx="34" cy="30" r="2"/>
+          <path d="M20 34 L20 12 L40 8 L40 30"/>
+          <line x1="20" y1="12" x2="40" y2="8"/>
+        </svg>
+        <div class="svc-title">DJ Entertainment</div>
+        <p class="svc-desc">Curated DJ sets, live bands, and classical performers. We match the music and energy to every moment of your celebration — from ceremony to after-party.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
     </div>
-    <div class="svc-card reveal" style="transition-delay:0.2s">
+
+    <!-- 05 FLORAL -->
+    <div class="svc-card reveal" style="transition-delay:0.08s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1487530811015-780780169993?w=600&q=80" alt="Floral Artistry" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">05</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <rect x="6" y="14" width="36" height="22" rx="1"/>
-        <path d="M14 36V42H34V36"/>
-        <path d="M19 25L21 21L24 27L26 23L29 25"/>
-      </svg>
-      <div class="svc-title">Live Entertainment</div>
-      <p class="svc-desc">Classical performers, DJs, and live bands. We match entertainment to the emotion of each moment in your celebration timeline.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <path d="M24 6L27.5 17H40L30 24.5L33.5 36L24 29L14.5 36L18 24.5L8 17H20.5Z"/>
+        </svg>
+        <div class="svc-title">Floral Artistry</div>
+        <p class="svc-desc">Seasonal blooms crafted into sculptures of beauty. Centerpieces, mandaps, canopies, and ceremonial arrangements that breathe life into your space.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
     </div>
-    <div class="svc-card reveal" style="transition-delay:0.3s">
+
+    <!-- 06 BRIDAL MAKEUP -->
+    <div class="svc-card reveal" style="transition-delay:0.16s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80" alt="Bridal Makeup" loading="lazy">
+      <div class="svc-overlay"></div>
       <div class="svc-num">06</div>
-      <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
-        <circle cx="24" cy="18" r="9"/>
-        <path d="M15 18C9 18 7 24 7 30H41C41 24 39 18 33 18"/>
-        <line x1="24" y1="30" x2="24" y2="42"/>
-        <line x1="18" y1="42" x2="30" y2="42"/>
-      </svg>
-      <div class="svc-title">Full Coordination</div>
-      <p class="svc-desc">From first consultation to final farewell, your dedicated director orchestrates every vendor and timeline so you can be fully present in your joy.</p>
-      <a href="#contact" class="svc-link">Explore</a>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <ellipse cx="24" cy="16" rx="10" ry="9"/>
+          <path d="M14 20 C10 26 10 34 14 39 C18 44 30 44 34 39 C38 34 38 26 34 20"/>
+          <path d="M19 26 Q24 30 29 26"/>
+          <line x1="18" y1="22" x2="15" y2="18"/>
+          <line x1="30" y1="22" x2="33" y2="18"/>
+        </svg>
+        <div class="svc-title">Bridal Makeup</div>
+        <p class="svc-desc">Our expert makeup artists transform brides with stunning traditional and contemporary looks — from classic South Indian to modern bridal glam, tailored to your features.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
+    </div>
+
+    <!-- 07 GARLANDS -->
+    <div class="svc-card reveal" style="transition-delay:0.24s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Wedding Garlands" loading="lazy">
+      <div class="svc-overlay"></div>
+      <div class="svc-num">07</div>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="10" cy="14" r="4"/>
+          <circle cx="22" cy="8" r="4"/>
+          <circle cx="34" cy="10" r="4"/>
+          <circle cx="42" cy="20" r="4"/>
+          <path d="M10 18 Q16 28 22 24 Q28 20 34 14 Q40 8 42 16"/>
+          <circle cx="10" cy="28" r="3"/>
+          <circle cx="24" cy="32" r="3"/>
+          <circle cx="38" cy="28" r="3"/>
+        </svg>
+        <div class="svc-title">Sacred Garlands</div>
+        <p class="svc-desc">Handcrafted jasmine, marigold, and rose garlands for every ceremony — jaimala, mandap, and venue garlands woven fresh on your wedding day with fragrant blooms.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
+    </div>
+
+    <!-- 08 COORDINATION -->
+    <div class="svc-card reveal" style="transition-delay:0.32s">
+      <img class="svc-photo" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=600&q=80" alt="Event Coordination" loading="lazy">
+      <div class="svc-overlay"></div>
+      <div class="svc-num">08</div>
+      <div class="svc-content">
+        <svg class="svc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="24" cy="18" r="9"/>
+          <path d="M15 18C9 18 7 24 7 30H41C41 24 39 18 33 18"/>
+          <line x1="24" y1="30" x2="24" y2="42"/>
+          <line x1="18" y1="42" x2="30" y2="42"/>
+        </svg>
+        <div class="svc-title">Full Coordination</div>
+        <p class="svc-desc">From first consultation to final farewell, your dedicated director orchestrates every vendor and timeline so you can be fully present in every precious moment.</p>
+        <a href="#contact" class="svc-link">Explore</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHOTO SHOWCASE -->
+<section class="showcase-bg">
+  <div class="showcase-grid">
+    <div class="showcase-item tall reveal">
+      <img class="showcase-img" src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80" alt="Bridal portrait" loading="lazy">
+      <div class="showcase-overlay"></div>
+      <div class="showcase-label">
+        <div class="showcase-tag">Bridal Makeup</div>
+        <div class="showcase-title">Radiant Beginnings</div>
+      </div>
+    </div>
+    <div class="showcase-item reveal" style="transition-delay:0.1s">
+      <img class="showcase-img" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80" alt="Wedding decor" loading="lazy">
+      <div class="showcase-overlay"></div>
+      <div class="showcase-label">
+        <div class="showcase-tag">Decor</div>
+        <div class="showcase-title">Dreamy Mandap</div>
+      </div>
+    </div>
+    <div class="showcase-item reveal" style="transition-delay:0.2s">
+      <img class="showcase-img" src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&q=80" alt="Wedding flowers" loading="lazy">
+      <div class="showcase-overlay"></div>
+      <div class="showcase-label">
+        <div class="showcase-tag">Garlands</div>
+        <div class="showcase-title">Fragrant Traditions</div>
+      </div>
+    </div>
+    <div class="showcase-item reveal" style="transition-delay:0.15s">
+      <img class="showcase-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Wedding food" loading="lazy">
+      <div class="showcase-overlay"></div>
+      <div class="showcase-label">
+        <div class="showcase-tag">Catering</div>
+        <div class="showcase-title">A Feast to Remember</div>
+      </div>
+    </div>
+    <div class="showcase-item wide reveal" style="transition-delay:0.25s">
+      <img class="showcase-img" src="https://images.unsplash.com/photo-1516873240891-4bf014598ab4?w=1200&q=80" alt="DJ lights" loading="lazy">
+      <div class="showcase-overlay"></div>
+      <div class="showcase-label">
+        <div class="showcase-tag">DJ Entertainment</div>
+        <div class="showcase-title">Dance the Night Away</div>
+      </div>
     </div>
   </div>
 </section>
@@ -675,17 +593,17 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
       <div class="process-step reveal" style="transition-delay:0.12s">
         <div class="step-circle"><span class="step-num-label">II</span></div>
         <div class="step-title">Curation</div>
-        <p class="step-desc">We design a bespoke concept including mood boards, layouts, menus, and timelines tailored to your desires.</p>
+        <p class="step-desc">We design a bespoke concept with mood boards, layouts, menus, and timelines tailored to you.</p>
       </div>
       <div class="process-step reveal" style="transition-delay:0.24s">
         <div class="step-circle"><span class="step-num-label">III</span></div>
         <div class="step-title">Orchestration</div>
-        <p class="step-desc">Our team handles every vendor, every logistics detail, every contingency — completely stress-free for you.</p>
+        <p class="step-desc">Our team handles every vendor, every logistics detail, every contingency — stress-free for you.</p>
       </div>
       <div class="process-step reveal" style="transition-delay:0.36s">
         <div class="step-circle"><span class="step-num-label">IV</span></div>
         <div class="step-title">Your Moment</div>
-        <p class="step-desc">On your day, you are royalty. We handle everything behind the scenes while you live in the magic.</p>
+        <p class="step-desc">On your day, you are royalty. We handle everything behind the scenes while you live the magic.</p>
       </div>
     </div>
   </div>
@@ -699,85 +617,55 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
     <p>A glimpse into the celebrations we have had the honour of creating.</p>
   </div>
   <div class="gallery-scroll reveal" style="transition-delay:0.2s">
+
     <div class="gallery-item">
-      <div class="gallery-art-block g1">
-        <div style="position:absolute;width:150px;height:150px;background:rgba(196,121,106,0.22);border-radius:50%;filter:blur(35px);top:20%;left:20%;"></div>
-        <div class="gallery-art-inner">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-            <circle cx="40" cy="40" r="35" stroke="rgba(201,169,110,0.3)" stroke-width="0.6"/>
-            <circle cx="40" cy="40" r="22" stroke="rgba(201,169,110,0.2)" stroke-width="0.6"/>
-            <text x="40" y="48" text-anchor="middle" font-size="22" fill="rgba(201,169,110,0.45)" font-family="Georgia,serif">&#10022;</text>
-          </svg>
-        </div>
-      </div>
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80" alt="Wedding ceremony" loading="lazy">
       <div class="gallery-overlay">
         <div class="g-tag">Wedding</div>
         <div class="g-name">Priya &amp; Arjun</div>
       </div>
     </div>
+
     <div class="gallery-item">
-      <div class="gallery-art-block g2">
-        <div style="position:absolute;width:130px;height:130px;background:rgba(138,158,140,0.22);border-radius:50%;filter:blur(35px);bottom:25%;right:15%;"></div>
-        <div class="gallery-art-inner">
-          <svg width="70" height="100" viewBox="0 0 70 100" fill="none">
-            <rect x="10" y="10" width="50" height="80" stroke="rgba(201,169,110,0.28)" stroke-width="0.6"/>
-            <rect x="20" y="20" width="30" height="60" stroke="rgba(201,169,110,0.18)" stroke-width="0.6"/>
-            <text x="35" y="62" text-anchor="middle" font-size="18" fill="rgba(201,169,110,0.4)" font-family="Georgia,serif">&#10022;</text>
-          </svg>
-        </div>
-      </div>
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=500&q=80" alt="Bridal makeup" loading="lazy">
       <div class="gallery-overlay">
-        <div class="g-tag">Reception</div>
-        <div class="g-name">Meera &amp; Vikram</div>
+        <div class="g-tag">Bridal Makeup</div>
+        <div class="g-name">Meera's Transformation</div>
       </div>
     </div>
+
     <div class="gallery-item">
-      <div class="gallery-art-block g3">
-        <div style="position:absolute;width:160px;height:160px;background:rgba(196,121,106,0.18);border-radius:50%;filter:blur(40px);top:15%;left:30%;"></div>
-        <div class="gallery-art-inner">
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
-            <circle cx="45" cy="45" r="40" stroke="rgba(201,169,110,0.28)" stroke-width="0.6"/>
-            <circle cx="45" cy="45" r="26" stroke="rgba(201,169,110,0.2)" stroke-width="0.6"/>
-            <line x1="45" y1="5" x2="45" y2="85" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
-            <line x1="5" y1="45" x2="85" y2="45" stroke="rgba(201,169,110,0.12)" stroke-width="0.5"/>
-            <text x="45" y="53" text-anchor="middle" font-size="16" fill="rgba(201,169,110,0.4)" font-family="Georgia,serif">&#8734;</text>
-          </svg>
-        </div>
-      </div>
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=500&q=80" alt="Wedding decor" loading="lazy">
       <div class="gallery-overlay">
-        <div class="g-tag">Engagement</div>
+        <div class="g-tag">Decor</div>
         <div class="g-name">Ananya &amp; Rohan</div>
       </div>
     </div>
+
     <div class="gallery-item">
-      <div class="gallery-art-block g4">
-        <div style="position:absolute;width:140px;height:140px;background:rgba(74,93,112,0.25);border-radius:50%;filter:blur(35px);bottom:10%;right:10%;"></div>
-        <div class="gallery-art-inner">
-          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-            <rect x="15" y="15" width="50" height="50" transform="rotate(45 40 40)" stroke="rgba(201,169,110,0.28)" stroke-width="0.6"/>
-            <rect x="25" y="25" width="30" height="30" transform="rotate(45 40 40)" stroke="rgba(201,169,110,0.18)" stroke-width="0.6"/>
-          </svg>
-        </div>
-      </div>
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80" alt="Wedding garlands" loading="lazy">
       <div class="gallery-overlay">
-        <div class="g-tag">Anniversary Gala</div>
+        <div class="g-tag">Garlands</div>
         <div class="g-name">The Krishnamurthys</div>
       </div>
     </div>
+
     <div class="gallery-item">
-      <div class="gallery-art-block g5">
-        <div style="position:absolute;width:170px;height:170px;background:rgba(122,85,72,0.22);border-radius:50%;filter:blur(40px);top:0;left:0;"></div>
-        <div class="gallery-art-inner">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:0.7rem;color:rgba(201,169,110,0.4);letter-spacing:0.22em;font-style:italic;margin-bottom:0.8rem;">FOREVER</div>
-          <div style="width:60px;height:1px;background:rgba(201,169,110,0.22);margin-bottom:0.8rem;"></div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:rgba(201,169,110,0.35);">&#8734;</div>
-        </div>
-      </div>
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500&q=80" alt="Wedding photography" loading="lazy">
       <div class="gallery-overlay">
-        <div class="g-tag">Destination Wedding</div>
+        <div class="g-tag">Photography</div>
         <div class="g-name">Deepa &amp; Karthik</div>
       </div>
     </div>
+
+    <div class="gallery-item">
+      <img class="gallery-photo" src="https://images.unsplash.com/photo-1516873240891-4bf014598ab4?w=500&q=80" alt="DJ party" loading="lazy">
+      <div class="gallery-overlay">
+        <div class="g-tag">DJ Night</div>
+        <div class="g-name">Lakshmi &amp; Vivek</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -790,17 +678,17 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
     </div>
     <div class="testi-slider reveal" style="transition-delay:0.2s">
       <div class="testi active">
-        <p class="testi-quote">"Eternelle did not just plan our wedding, they understood who we are. Every flower, every dish, every photograph told our story. It was beyond anything we imagined."</p>
+        <p class="testi-quote">"Eternelle did not just plan our wedding, they understood who we are. The bridal makeup was flawless, the garlands were breathtaking, and every photograph told our story perfectly."</p>
         <div class="testi-author">Priya &amp; Arjun Sharma</div>
         <div class="testi-occasion">Garden Wedding, Chennai — March 2024</div>
       </div>
       <div class="testi">
-        <p class="testi-quote">"From the first meeting, we knew we were in extraordinary hands. The decor made our guests gasp. The food made them weep. Our memories will last forever."</p>
+        <p class="testi-quote">"From the first meeting, we knew we were in extraordinary hands. The decor made our guests gasp, the DJ had everyone dancing, and the food was absolutely incredible."</p>
         <div class="testi-author">Meera &amp; Vikram Nair</div>
         <div class="testi-occasion">Grand Reception, Coimbatore — November 2023</div>
       </div>
       <div class="testi">
-        <p class="testi-quote">"Our wedding was flawless. Every single detail was exactly as we dreamed, and several details we had not even thought to dream. The photography is breathtaking."</p>
+        <p class="testi-quote">"My bridal makeup was everything I dreamed of. The jasmine garlands were so fresh and fragrant. Our wedding photography is breathtaking — every frame is a piece of art."</p>
         <div class="testi-author">Ananya &amp; Rohan Pillai</div>
         <div class="testi-occasion">Destination Wedding, Pondicherry — January 2024</div>
       </div>
@@ -831,7 +719,8 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
         <li>Decor for up to 100 Guests</li>
         <li>Photography (8 hours)</li>
         <li>Catering — 3 Course Menu</li>
-        <li>Basic Floral Arrangements</li>
+        <li>Basic Floral and Garlands</li>
+        <li>Bridal Makeup (1 session)</li>
         <li>1 Coordinator on Event Day</li>
       </ul>
       <a href="#contact" class="pkg-cta">Enquire Now</a>
@@ -847,10 +736,10 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
         <li>Decor for up to 300 Guests</li>
         <li>Photography and Videography</li>
         <li>Catering — 5 Course Gourmet</li>
-        <li>Premium Floral Artistry</li>
-        <li>Live Entertainment</li>
+        <li>Premium Garlands and Florals</li>
+        <li>Bridal Makeup and Hair Styling</li>
+        <li>DJ and Live Entertainment</li>
         <li>2 Coordinators on Event Day</li>
-        <li>Complimentary Trial Run</li>
       </ul>
       <a href="#contact" class="pkg-cta">Enquire Now</a>
     </div>
@@ -864,10 +753,10 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
         <li>Multi-Day Event Planning</li>
         <li>Full Cinematic Production</li>
         <li>International Cuisine Curation</li>
-        <li>Exclusive Venue Sourcing</li>
-        <li>Celebrity Entertainment Options</li>
+        <li>Celebrity Makeup Artists</li>
+        <li>Exclusive Garland and Floral Art</li>
+        <li>Live Band and DJ Package</li>
         <li>Dedicated Event Director</li>
-        <li>White-Glove Hospitality</li>
       </ul>
       <a href="#contact" class="pkg-cta">Begin Conversation</a>
     </div>
@@ -885,32 +774,24 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
       <h3>We would love to hear about your vision.</h3>
       <p>Whether you have a clear idea or just a feeling, reach out and let us start the conversation. Our first consultation is always complimentary.</p>
       <div class="c-detail">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.4 2.78 2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/>
-        </svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.4 2.78 2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.45-1.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
         <div><div class="c-label">Phone</div><div class="c-val">+91 98400 00000</div></div>
       </div>
       <div class="c-detail">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         <div><div class="c-label">Email</div><div class="c-val">hello@eternelle.in</div></div>
       </div>
       <div class="c-detail">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <div><div class="c-label">Studio</div><div class="c-val">Anna Nagar, Chennai, Tamil Nadu</div></div>
       </div>
       <div>
-        <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,246,240,0.32);margin-bottom:0.9rem;">Follow Our Work</div>
+        <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,246,240,0.32);margin-bottom:0.9rem;margin-top:1rem;">Follow Our Work</div>
         <div class="social-row" style="margin-top:0;">
           <a href="#" class="social-btn">ig</a>
           <a href="#" class="social-btn">fb</a>
           <a href="#" class="social-btn">yt</a>
-          <a href="#" class="social-btn">pi</a>
+          <a href="#" class="social-btn">wa</a>
         </div>
       </div>
     </div>
@@ -939,6 +820,18 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
         </div>
         <div class="form-group"><label>Event Date</label><input type="date"></div>
       </div>
+      <div class="form-group"><label>Services Needed</label>
+        <select>
+          <option value="" disabled selected>Select services</option>
+          <option>Full Package</option>
+          <option>Decor Only</option>
+          <option>Photography + Videography</option>
+          <option>Bridal Makeup</option>
+          <option>Garlands and Florals</option>
+          <option>Catering</option>
+          <option>DJ Entertainment</option>
+        </select>
+      </div>
       <div class="form-group"><label>Your Vision</label><textarea placeholder="Tell us about your dream celebration..."></textarea></div>
       <button class="form-submit">Send My Enquiry</button>
     </div>
@@ -955,7 +848,7 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
         <a href="#" class="social-btn">ig</a>
         <a href="#" class="social-btn">fb</a>
         <a href="#" class="social-btn">yt</a>
-        <a href="#" class="social-btn">pi</a>
+        <a href="#" class="social-btn">wa</a>
       </div>
     </div>
     <div class="footer-col">
@@ -973,9 +866,10 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
       <ul>
         <li><a href="#">Bespoke Decor</a></li>
         <li><a href="#">Photography</a></li>
+        <li><a href="#">Bridal Makeup</a></li>
+        <li><a href="#">Garlands and Florals</a></li>
+        <li><a href="#">DJ Entertainment</a></li>
         <li><a href="#">Catering</a></li>
-        <li><a href="#">Floral Artistry</a></li>
-        <li><a href="#">Entertainment</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -991,15 +885,14 @@ footer { background: #100d09; padding: 4.5rem 4rem 2.5rem; }
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">2025 Eternelle Event Architects. All rights reserved.</div>
-    <div class="footer-motto">CRAFTED WITH LOVE</div>
+    <div class="footer-motto">CRAFTED WITH LOVE IN CHENNAI</div>
   </div>
 </footer>
 
 <script>
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
+var cursor = document.getElementById('cursor');
+var ring   = document.getElementById('cursorRing');
+var mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove', function(e){
   mx = e.clientX; my = e.clientY;
   cursor.style.transform = 'translate('+(mx-4)+'px,'+(my-4)+'px)';
@@ -1009,23 +902,20 @@ document.addEventListener('mousemove', function(e){
   ring.style.transform = 'translate('+(rx-18)+'px,'+(ry-18)+'px)';
   requestAnimationFrame(animRing);
 })();
-document.querySelectorAll('a,button,.dot,.svc-card,.pkg-card,.gallery-item').forEach(function(el){
+document.querySelectorAll('a,button,.dot,.svc-card,.pkg-card,.gallery-item,.showcase-item').forEach(function(el){
   el.addEventListener('mouseenter',function(){ ring.style.width='56px'; ring.style.height='56px'; ring.style.opacity='0.35'; });
   el.addEventListener('mouseleave',function(){ ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.6'; });
 });
 
-// SCROLL REVEAL
 var io = new IntersectionObserver(function(entries){
   entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
 },{threshold:0.08, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-// NAV
 window.addEventListener('scroll',function(){
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>40);
 });
 
-// TESTIMONIALS
 var curT=0;
 function showTesti(i){
   document.querySelectorAll('.testi').forEach(function(t){ t.classList.remove('active'); });

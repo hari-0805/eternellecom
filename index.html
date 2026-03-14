@@ -42,6 +42,8 @@ nav.scrolled{background:rgba(26,20,16,.98)}
 .mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--ivory);text-decoration:none;letter-spacing:.06em;transition:color .3s}
 .mobile-menu a:hover{color:var(--gold)}
 .mobile-menu .m-cta{border:1px solid var(--gold);color:var(--gold)!important;padding:.6rem 2rem;font-family:'Josefin Sans',sans-serif;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;margin-top:.5rem}
+.menu-close{position:absolute;top:1.8rem;right:2rem;background:none;border:none;color:var(--gold);font-size:1.6rem;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;opacity:.8;transition:opacity .3s,transform .3s}
+.menu-close:hover{opacity:1;transform:rotate(90deg)}
 
 /* HERO */
 .hero{
@@ -123,7 +125,7 @@ h2 em{font-style:italic;color:var(--gold)}
 .about-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .about-vis{position:relative;aspect-ratio:3/4}
 .about-frame{position:absolute;inset:0;border:1px solid rgba(201,169,110,.22);overflow:hidden}
-.about-frame img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) sepia(.18)}
+.about-frame img{width:100%;height:100%;object-fit:cover;filter:brightness(.88) sepia(.08)}
 .about-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.55),transparent 50%)}
 .corner{position:absolute;width:42px;height:42px;border-color:var(--gold);border-style:solid;opacity:.45;z-index:2}
 .corner.tl{top:-7px;left:-7px;border-width:1px 0 0 1px}
@@ -139,8 +141,8 @@ h2 em{font-style:italic;color:var(--gold)}
 .svc-hd p{font-size:.92rem;line-height:2;color:rgba(250,246,240,.52);margin-top:1.3rem}
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:1340px;margin:0 auto}
 .svc-card{position:relative;overflow:hidden;cursor:none;aspect-ratio:3/4;min-height:360px}
-.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.44) saturate(.8)}
-.svc-card:hover .svc-photo{transform:scale(1.08);filter:brightness(.32) saturate(.7)}
+.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.65) saturate(.95)}
+.svc-card:hover .svc-photo{transform:scale(1.08);filter:brightness(.5) saturate(.85)}
 .svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.95) 0%,rgba(26,20,16,.35) 55%,transparent 100%);transition:background .4s}
 .svc-card:hover .svc-ov{background:linear-gradient(to top,rgba(45,35,24,.98) 0%,rgba(26,20,16,.6) 65%,rgba(26,20,16,.18) 100%)}
 .svc-n{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:300;color:rgba(201,169,110,.13);line-height:1;position:absolute;top:.9rem;right:1.2rem;user-select:none;transition:color .4s}
@@ -160,8 +162,8 @@ h2 em{font-style:italic;color:var(--gold)}
 .si{position:relative;overflow:hidden;cursor:none;line-height:1}
 .si.tall{grid-row:span 2}
 .si.wide{grid-column:span 2}
-.si img{width:100%;height:100%;object-fit:cover;filter:brightness(.68) saturate(.85);transition:transform .6s,filter .4s}
-.si:hover img{transform:scale(1.05);filter:brightness(.5) saturate(.75)}
+.si img{width:100%;height:100%;object-fit:cover;filter:brightness(.82) saturate(.95);transition:transform .6s,filter .4s}
+.si:hover img{transform:scale(1.05);filter:brightness(.65) saturate(.88)}
 .si-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.72),transparent 60%)}
 .si-lbl{position:absolute;bottom:1.6rem;left:1.8rem}
 .si-tag{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
@@ -188,7 +190,7 @@ h2 em{font-style:italic;color:var(--gold)}
 .gal-item{flex:0 0 280px;aspect-ratio:2/3;position:relative;overflow:hidden;cursor:none}
 .gal-item:nth-child(2){margin-top:2.5rem}
 .gal-item:nth-child(4){margin-top:-2.5rem}
-.gal-photo{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.7) saturate(.85)}
+.gal-photo{width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.85) saturate(.95)}
 .gal-item:hover .gal-photo{transform:scale(1.06)}
 .gal-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.9),transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.7rem;opacity:0;transition:opacity .4s}
 .gal-item:hover .gal-ov{opacity:1}
@@ -250,9 +252,20 @@ h2 em{font-style:italic;color:var(--gold)}
 .c-lbl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.35);margin-bottom:.25rem}
 .c-val{font-size:.9rem;color:var(--ivory)}
 .c-note{font-size:.66rem;color:rgba(201,169,110,.52);margin-top:.3rem}
-.soc{display:flex;gap:.9rem;margin-top:.5rem}
-.soc a{width:36px;height:36px;border:1px solid rgba(201,169,110,.22);display:flex;align-items:center;justify-content:center;color:rgba(201,169,110,.5);text-decoration:none;font-size:.72rem;transition:border-color .3s,color .3s;cursor:none}
-.soc a:hover{border-color:var(--gold);color:var(--gold)}
+.soc{display:flex;gap:.85rem;margin-top:.5rem}
+.soc a{width:40px;height:40px;border:1px solid rgba(201,169,110,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(201,169,110,.5);text-decoration:none;transition:all .35s;cursor:none;position:relative;overflow:hidden}
+.soc a svg{width:20px;height:20px;transition:transform .3s,color .3s;position:relative;z-index:1}
+.soc a::before{content:'';position:absolute;inset:0;border-radius:50%;opacity:0;transition:opacity .35s;transform:scale(0);transition:transform .35s,opacity .35s}
+.soc a:hover{border-color:transparent;color:#fff;transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.soc a:hover::before{opacity:1;transform:scale(1)}
+/* Instagram gradient */
+.soc a.ig::before{background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+/* Facebook blue */
+.soc a.s-fb::before{background:#1877f2}
+/* WhatsApp green */
+.soc a.wa::before{background:#25d366}
+/* YouTube red */
+.soc a.yt::before{background:#ff0000}
 .c-right{padding:4.5rem 3.5rem;background:rgba(201,169,110,.04)}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .fg{margin-bottom:1.5rem}
@@ -370,7 +383,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     <li><a href="#gallery">Portfolio</a></li>
     <li><a href="#packages">Packages</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Begin Your Story</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
   </ul>
   <button class="hamburger" id="hbg" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -379,12 +392,13 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" onclick="closeMenu()" aria-label="Close menu">&#10005;</button>
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#services" onclick="closeMenu()">Services</a>
   <a href="#gallery" onclick="closeMenu()">Portfolio</a>
   <a href="#packages" onclick="closeMenu()">Packages</a>
   <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="#contact" class="m-cta" onclick="closeMenu()">Begin Your Story</a>
+  <a href="#contact" class="m-cta" onclick="closeMenu()">Contact Us</a>
 </div>
 
 <!-- HERO -->
@@ -397,7 +411,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     <div class="slide s5"></div>
   </div>
   <div class="hero-body">
-    <div class="h-eyebrow">Luxury Event Architects</div>
+    <div class="h-eyebrow">Event Planners · Sathyamangalam</div>
     <h1 class="h-title">Every Moment<br><em>Deserves</em>Forever</h1>
     <p class="h-sub">We craft bespoke celebrations that transcend the ordinary — weddings, receptions, and milestone events tailored to your unique love story.</p>
     <div class="h-btns">
@@ -416,7 +430,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 
 <!-- MARQUEE -->
 <div class="mq-wrap"><div class="mq-track">
-  <span class="mq-item">Weddings &#10022;</span><span class="mq-item">Receptions &#10022;</span><span class="mq-item">Bridal Makeup &#10022;</span><span class="mq-item">Sacred Garlands &#10022;</span><span class="mq-item">Luxury Decor &#10022;</span><span class="mq-item">Gourmet Catering &#10022;</span><span class="mq-item">Cinematic Photography &#10022;</span><span class="mq-item">DJ Entertainment &#10022;</span><span class="mq-item">Floral Artistry &#10022;</span><span class="mq-item">Engagements &#10022;</span><span class="mq-item">Weddings &#10022;</span><span class="mq-item">Receptions &#10022;</span><span class="mq-item">Bridal Makeup &#10022;</span><span class="mq-item">Sacred Garlands &#10022;</span><span class="mq-item">Luxury Decor &#10022;</span><span class="mq-item">Gourmet Catering &#10022;</span><span class="mq-item">Cinematic Photography &#10022;</span><span class="mq-item">DJ Entertainment &#10022;</span><span class="mq-item">Floral Artistry &#10022;</span><span class="mq-item">Engagements &#10022;</span>
+  <span class="mq-item">Weddings &#10022;</span><span class="mq-item">Receptions &#10022;</span><span class="mq-item">Bridal Makeup &#10022;</span><span class="mq-item">Garlands &#10022;</span><span class="mq-item">Decor &#10022;</span><span class="mq-item">Catering &#10022;</span><span class="mq-item">Photography &#10022;</span><span class="mq-item">DJ &amp; Music &#10022;</span><span class="mq-item">Florals &#10022;</span><span class="mq-item">Engagements &#10022;</span><span class="mq-item">Weddings &#10022;</span><span class="mq-item">Receptions &#10022;</span><span class="mq-item">Bridal Makeup &#10022;</span><span class="mq-item">Garlands &#10022;</span><span class="mq-item">Decor &#10022;</span><span class="mq-item">Catering &#10022;</span><span class="mq-item">Photography &#10022;</span><span class="mq-item">DJ &amp; Music &#10022;</span><span class="mq-item">Florals &#10022;</span><span class="mq-item">Engagements &#10022;</span>
 </div></div>
 
 <!-- ABOUT -->
@@ -429,8 +443,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="corner tl"></div><div class="corner br"></div>
     </div>
     <div class="about-text reveal" style="transition-delay:.15s">
-      <div class="lbl">Our Story</div>
-      <h2>Crafting <em>Unforgettable</em> Celebrations</h2>
+      <div class="lbl">About Us</div>
+      <h2>We Create <em>Beautiful</em> Weddings</h2>
       <div class="gold-bar"></div>
       <p>At Eternelle, we believe every love story is singular and every celebration should reflect that uniqueness. We are not merely event planners — we are architects of memory, weavers of atmosphere, and orchestrators of emotion.</p>
       <p>From intimate garden weddings to grand ballroom galas, our team handles every detail with white-glove precision: breathtaking decor, bridal makeup, sacred garlands, curated cuisine, cinematic photography, and live DJ entertainment.</p>
@@ -447,8 +461,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 <!-- SERVICES -->
 <section id="services" class="svc-bg">
   <div class="svc-hd reveal">
-    <div class="lbl lbl-c">What We Offer</div>
-    <h2>Eight Pillars of <em>Perfection</em></h2>
+    <div class="lbl lbl-c">Our Services</div>
+    <h2>Our <em>Services</em></h2>
     <p>Every element of your celebration is curated, customized, and executed with obsessive attention to detail.</p>
   </div>
   <div class="svc-grid">
@@ -457,7 +471,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">01</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 4L44 14V34L24 44L4 34V14Z"/><circle cx="24" cy="24" r="7"/><line x1="24" y1="17" x2="24" y2="9"/><line x1="24" y1="31" x2="24" y2="39"/><line x1="17" y1="24" x2="9" y2="24"/><line x1="31" y1="24" x2="39" y2="24"/></svg>
-        <div class="svc-ttl">Bespoke Decor</div>
+        <div class="svc-ttl">Decor</div>
         <p class="svc-dsc">Every table, arch, and petal designed around your palette. We transform venues into living art installations you will never want to leave.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -467,7 +481,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">02</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="6" y="12" width="36" height="26" rx="1"/><circle cx="24" cy="25" r="7"/><circle cx="24" cy="25" r="3"/><rect x="18" y="7" width="12" height="5" rx="1"/></svg>
-        <div class="svc-ttl">Cinematic Photography</div>
+        <div class="svc-ttl">Photography</div>
         <p class="svc-dsc">Award-winning photographers and videographers who tell your story with artistic vision — creating heirlooms treasured across generations.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -477,7 +491,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">03</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 36C8 28 14 20 24 18C34 20 40 28 40 36Z"/><path d="M16 18C16 12 20 8 24 8C28 8 32 12 32 18"/><line x1="24" y1="36" x2="24" y2="42"/><line x1="16" y1="42" x2="32" y2="42"/></svg>
-        <div class="svc-ttl">Gourmet Catering</div>
+        <div class="svc-ttl">Catering</div>
         <p class="svc-dsc">Traditional South Indian feasts to fusion cuisines. Bespoke menus that delight every palate — from multi-course dining to live food stations.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -487,7 +501,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">04</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="34" r="6"/><circle cx="34" cy="30" r="6"/><circle cx="14" cy="34" r="2"/><circle cx="34" cy="30" r="2"/><path d="M20 34V12L40 8V30"/></svg>
-        <div class="svc-ttl">DJ Entertainment</div>
+        <div class="svc-ttl">DJ &amp; Music</div>
         <p class="svc-dsc">Curated DJ sets, live bands, and classical performers. We match music and energy to every moment — from ceremony to after-party.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -497,7 +511,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">05</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6L27.5 17H40L30 24.5L33.5 36L24 29L14.5 36L18 24.5L8 17H20.5Z"/></svg>
-        <div class="svc-ttl">Floral Artistry</div>
+        <div class="svc-ttl">Florals</div>
         <p class="svc-dsc">Seasonal blooms crafted into sculptures of beauty. Centerpieces, mandaps, canopies, and ceremonial arrangements that breathe life into your space.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -517,7 +531,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">07</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="10" cy="14" r="4"/><circle cx="22" cy="8" r="4"/><circle cx="34" cy="10" r="4"/><circle cx="42" cy="20" r="4"/><path d="M10 18Q16 28 22 24Q28 20 34 14Q40 8 42 16"/></svg>
-        <div class="svc-ttl">Sacred Garlands</div>
+        <div class="svc-ttl">Garlands</div>
         <p class="svc-dsc">Handcrafted jasmine, marigold, and rose garlands for every ceremony — jaimala, mandap, and venue garlands woven fresh on your wedding day.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -527,7 +541,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="svc-ov"></div><div class="svc-n">08</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="24" cy="18" r="9"/><path d="M15 18C9 18 7 24 7 30H41C41 24 39 18 33 18"/><line x1="24" y1="30" x2="24" y2="42"/><line x1="18" y1="42" x2="30" y2="42"/></svg>
-        <div class="svc-ttl">Full Coordination</div>
+        <div class="svc-ttl">Event Planning</div>
         <p class="svc-dsc">From first consultation to final farewell, your dedicated director orchestrates every vendor and timeline so you are fully present in every precious moment.</p>
         <a href="#contact" class="svc-lnk">Explore</a>
       </div>
@@ -541,27 +555,27 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     <div class="si tall reveal">
       <img src="images/show1.jpg" alt="Bridal" loading="lazy">
       <div class="si-ov"></div>
-      <div class="si-lbl"><div class="si-tag">Bridal Makeup</div><div class="si-title">Radiant Beginnings</div></div>
+      <div class="si-lbl"><div class="si-tag">Bridal Makeup</div><div class="si-title">Bridal Look</div></div>
     </div>
     <div class="si reveal" style="transition-delay:.1s">
       <img src="images/show2.jpg" alt="Decor" loading="lazy">
       <div class="si-ov"></div>
-      <div class="si-lbl"><div class="si-tag">Decor</div><div class="si-title">Dreamy Mandap</div></div>
+      <div class="si-lbl"><div class="si-tag">Decor</div><div class="si-title">Stage Decor</div></div>
     </div>
     <div class="si reveal" style="transition-delay:.2s">
       <img src="images/show3.jpg" alt="Flowers" loading="lazy">
       <div class="si-ov"></div>
-      <div class="si-lbl"><div class="si-tag">Garlands</div><div class="si-title">Fragrant Traditions</div></div>
+      <div class="si-lbl"><div class="si-tag">Garlands</div><div class="si-title">Garlands</div></div>
     </div>
     <div class="si reveal" style="transition-delay:.15s">
       <img src="images/show4.jpg" alt="Feast" loading="lazy">
       <div class="si-ov"></div>
-      <div class="si-lbl"><div class="si-tag">Catering</div><div class="si-title">A Feast to Remember</div></div>
+      <div class="si-lbl"><div class="si-tag">Catering</div><div class="si-title">Food &amp; Catering</div></div>
     </div>
     <div class="si wide reveal" style="transition-delay:.25s">
       <img src="images/show5.jpg" alt="DJ" loading="lazy">
       <div class="si-ov"></div>
-      <div class="si-lbl"><div class="si-tag">DJ Entertainment</div><div class="si-title">Dance the Night Away</div></div>
+      <div class="si-lbl"><div class="si-tag">DJ &amp; Music</div><div class="si-title">DJ Night</div></div>
     </div>
   </div>
 </div>
@@ -570,8 +584,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 <section>
   <div class="proc-inner">
     <div class="proc-hd reveal">
-      <div class="lbl lbl-c">Our Process</div>
-      <h2>From <em>Dream</em> to Reality</h2>
+      <div class="lbl lbl-c">How It Works</div>
+      <h2>How We <em>Work</em></h2>
     </div>
     <div class="proc-steps">
       <div class="proc-step reveal">
@@ -586,7 +600,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       </div>
       <div class="proc-step reveal" style="transition-delay:.24s">
         <div class="step-circle"><span class="step-num">III</span></div>
-        <div class="step-ttl">Orchestration</div>
+        <div class="step-ttl">Execution</div>
         <p class="step-dsc">Our team handles every vendor, every logistics detail, every contingency — completely stress-free for you.</p>
       </div>
       <div class="proc-step reveal" style="transition-delay:.36s">
@@ -602,7 +616,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 <section id="gallery" class="gal-bg">
   <div class="gal-hd reveal">
     <div class="lbl lbl-c">Portfolio</div>
-    <h2>Stories We Have <em>Told</em></h2>
+    <h2>Our <em>Portfolio</em></h2>
     <p>A glimpse into the celebrations we have had the honour of creating.</p>
   </div>
   <div class="gal-scroll reveal" style="transition-delay:.2s">
@@ -638,7 +652,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   <div class="testi-wrap">
     <div class="reveal">
       <div class="lbl lbl-c">Kind Words</div>
-      <h2>What Our Couples <em>Say</em></h2>
+      <h2>Happy <em>Couples</em></h2>
     </div>
     <div class="testi-slider reveal" style="transition-delay:.2s">
       <div class="testi active">
@@ -669,14 +683,14 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 <section id="packages" class="pkg-bg">
   <div class="pkg-hd reveal">
     <div class="lbl lbl-c">Investment</div>
-    <h2>Choose Your <em>Canvas</em></h2>
+    <h2>Our <em>Packages</em></h2>
     <p>Every package is customizable. These are starting points, not limits.</p>
   </div>
   <div class="pkg-grid">
     <div class="pkg-card reveal">
-      <div class="pkg-tier">Intimate</div>
-      <div class="pkg-name">Blossom</div>
-      <div class="pkg-price">Starting from Rs. 3,50,000</div>
+      <div class="pkg-tier">Starter</div>
+      <div class="pkg-name">Basic</div>
+      
       <div class="pkg-div"></div>
       <ul class="pkg-ul">
         <li>Event Planning &amp; Coordination</li>
@@ -691,9 +705,9 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     </div>
     <div class="pkg-card feat reveal" style="transition-delay:.12s">
       <div class="pkg-badge">Most Loved</div>
-      <div class="pkg-tier">Signature</div>
-      <div class="pkg-name">Ethereal</div>
-      <div class="pkg-price">Starting from Rs. 8,50,000</div>
+      <div class="pkg-tier">Popular</div>
+      <div class="pkg-name">Standard</div>
+      
       <div class="pkg-div"></div>
       <ul class="pkg-ul">
         <li>Full Event Planning &amp; Management</li>
@@ -708,9 +722,9 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <a href="#contact" class="pkg-cta">Enquire Now</a>
     </div>
     <div class="pkg-card reveal" style="transition-delay:.24s">
-      <div class="pkg-tier">Prestige</div>
-      <div class="pkg-name">Lumiere</div>
-      <div class="pkg-price">Fully Bespoke</div>
+      <div class="pkg-tier">Luxury</div>
+      <div class="pkg-name">Premium</div>
+      
       <div class="pkg-div"></div>
       <ul class="pkg-ul">
         <li>Unlimited Guest Count</li>
@@ -732,8 +746,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   <div class="faq-inner">
     <div class="faq-hd reveal">
       <div class="lbl lbl-c">Questions</div>
-      <h2>Frequently <em>Asked</em></h2>
-      <p>Everything you need to know before we begin your journey together.</p>
+      <h2>Common <em>Questions</em></h2>
+      <p>Answers to the most common questions we receive.</p>
     </div>
     <div class="reveal" style="transition-delay:.15s">
 
@@ -758,7 +772,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
           <span class="faq-q-text">Can I customize a package or mix services from different tiers?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Every package we offer is a starting point, not a rigid structure. You are completely free to add, remove, or swap services based on your needs and budget. Our Lumiere tier is entirely bespoke by design. We prefer to build your package around your vision rather than ask you to fit into ours.</div>
+        <div class="faq-a">Every package we offer is a starting point, not a rigid structure. You are completely free to add, remove, or swap services based on your needs and budget. Our Premium tier is entirely bespoke by design. We prefer to build your package around your vision rather than ask you to fit into ours.</div>
       </div>
 
       <div class="faq-item">
@@ -766,7 +780,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
           <span class="faq-q-text">What is included in the bridal makeup service?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Our bridal makeup service includes a pre-wedding consultation and trial session, day-of makeup application using premium brands, and touch-up support throughout the event. We offer traditional South Indian bridal looks, modern HD makeup, and fusion styles. Hair styling can be added as an upgrade or is included in the Ethereal and Lumiere packages.</div>
+        <div class="faq-a">Our bridal makeup service includes a pre-wedding consultation and trial session, day-of makeup application using premium brands, and touch-up support throughout the event. We offer traditional South Indian bridal looks, modern HD makeup, and fusion styles. Hair styling can be added as an upgrade or is included in the Standard and Premium packages.</div>
       </div>
 
       <div class="faq-item">
@@ -782,7 +796,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
           <span class="faq-q-text">Do you provide garlands and flowers for the entire venue?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">Yes. Our Sacred Garlands and Floral Artistry services cover everything from the bridal jaimala and groom garlands to mandap decorations, entrance arches, table centerpieces, and full venue floral installations. All garlands are handcrafted fresh on your wedding day using jasmine, marigold, rose, and other seasonal blooms of your choice.</div>
+        <div class="faq-a">Yes. Our Garlands and Florals services cover everything from the bridal jaimala and groom garlands to mandap decorations, entrance arches, table centerpieces, and full venue floral installations. All garlands are handcrafted fresh on your wedding day using jasmine, marigold, rose, and other seasonal blooms of your choice.</div>
       </div>
 
       <div class="faq-item">
@@ -809,12 +823,12 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 <section id="contact">
   <div style="text-align:center;margin-bottom:3.5rem" class="reveal">
     <div class="lbl lbl-c">Get In Touch</div>
-    <h2>Let Us Write Your <em>Story</em></h2>
+    <h2>Get In <em>Touch</em></h2>
   </div>
   <div class="contact-wrap reveal" style="transition-delay:.18s">
     <div class="c-left">
-      <h3>We would love to hear your vision.</h3>
-      <p>Whether you have a clear idea or just a feeling, reach out and let us start the conversation. Our first consultation is always complimentary.</p>
+      <h3>Talk to us about your event.</h3>
+      <p>Fill in the form and we will get back to you within 24 hours. First consultation is free.</p>
       <div class="c-row">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5 19.79 19.79 0 01.4 2.78 2 2 0 012.18 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
         <div><div class="c-lbl">Phone</div><div class="c-val">+91 98400 00000</div></div>
@@ -833,7 +847,15 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       </div>
       <div style="font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.32);margin:1.2rem 0 .8rem">Follow Our Work</div>
       <div class="soc">
-        <a href="#">ig</a><a href="#">fb</a><a href="#">yt</a><a href="#">wa</a>
+        <a href="https://instagram.com" target="_blank" class="ig" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" class="s-fb" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="https://wa.me/919840000000" target="_blank" class="wa" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
       </div>
     </div>
     <div class="c-right">
@@ -871,7 +893,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
           <option>Bridal Makeup</option>
           <option>Garlands and Florals</option>
           <option>Catering</option>
-          <option>DJ Entertainment</option>
+          <option>DJ &amp; Music</option>
         </select>
       </div>
       <div class="fg"><label>Your Vision</label><textarea placeholder="Tell us about your dream celebration..."></textarea></div>
@@ -887,7 +909,15 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="f-logo"><em>Eter</em>nelle</div>
       <p class="f-desc">Luxury event architects crafting unforgettable celebrations across Tamil Nadu since 2018. Expanding all over India soon.</p>
       <div class="soc" style="margin-top:1.6rem">
-        <a href="#">ig</a><a href="#">fb</a><a href="#">yt</a><a href="#">wa</a>
+        <a href="https://instagram.com" target="_blank" class="ig" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" class="s-fb" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.271h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="https://wa.me/919840000000" target="_blank" class="wa" title="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
       </div>
     </div>
     <div class="fc">
@@ -903,18 +933,18 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     <div class="fc">
       <h4>Services</h4>
       <ul>
-        <li><a href="#">Bespoke Decor</a></li>
+        <li><a href="#">Decor</a></li>
         <li><a href="#">Photography</a></li>
         <li><a href="#">Bridal Makeup</a></li>
         <li><a href="#">Garlands &amp; Florals</a></li>
-        <li><a href="#">DJ Entertainment</a></li>
+        <li><a href="#">DJ &amp; Music</a></li>
         <li><a href="#">Catering</a></li>
       </ul>
     </div>
     <div class="fc">
       <h4>Company</h4>
       <ul>
-        <li><a href="#">Our Story</a></li>
+        <li><a href="#">About Us</a></li>
         <li><a href="#">Portfolio</a></li>
         <li><a href="#">Packages</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -924,7 +954,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   </div>
   <div class="fb">
     <div class="fb-copy">&copy; 2025 Eternelle Event Architects. All rights reserved.</div>
-    <div class="fb-motto">CRAFTED WITH LOVE IN SATHYAMANGALAM</div>
+    <div class="fb-motto">BASED IN SATHYAMANGALAM, TAMIL NADU</div>
   </div>
 </footer>
 

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternelle — Admin Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a96e;--gold-lt:#e8d5a3;--dark:#0f0c09;--dark2:#1a1410;--dark3:#2d2318;--ivory:#faf6f0;--red:#e05555;--green:#55b855;--blue:#5588e0}
+html{font-size:15px}
+body{background:var(--dark);color:var(--ivory);font-family:'Segoe UI',sans-serif;display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{width:230px;background:var(--dark2);border-right:1px solid rgba(201,169,110,.12);display:flex;flex-direction:column;flex-shrink:0;position:fixed;top:0;left:0;bottom:0;z-index:100}
+.s-logo{padding:1.6rem 1.4rem;border-bottom:1px solid rgba(201,169,110,.12)}
+.s-logo span{font-family:Georgia,serif;font-size:1.4rem;color:var(--gold);font-style:italic}
+.s-logo small{display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,246,240,.3);margin-top:.2rem}
+nav{flex:1;padding:.8rem 0;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:.75rem;padding:.75rem 1.4rem;cursor:pointer;font-size:.82rem;color:rgba(250,246,240,.55);transition:background .2s,color .2s;border-left:3px solid transparent}
+.nav-item:hover{background:rgba(201,169,110,.07);color:var(--ivory)}
+.nav-item.active{background:rgba(201,169,110,.1);color:var(--gold);border-left-color:var(--gold)}
+.nav-item .icon{font-size:1rem;width:20px;text-align:center}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:.6rem;padding:.15rem .45rem;border-radius:999px}
+.s-footer{padding:1rem 1.4rem;border-top:1px solid rgba(201,169,110,.12)}
+.s-user{font-size:.75rem;color:rgba(250,246,240,.4);margin-bottom:.6rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.logout-btn{width:100%;padding:.5rem;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.2);color:var(--gold);cursor:pointer;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transition:background .3s}
+.logout-btn:hover{background:rgba(201,169,110,.2)}
+
+/* MAIN */
+.main{margin-left:230px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:var(--dark2);border-bottom:1px solid rgba(201,169,110,.12);padding:.9rem 1.8rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.page-title{font-size:1rem;font-weight:600;color:var(--ivory)}
+.topbar-right{display:flex;align-items:center;gap:.8rem}
+.view-site{font-size:.7rem;padding:.4rem .9rem;border:1px solid rgba(201,169,110,.3);color:var(--gold);text-decoration:none;border-radius:2px;transition:background .2s}
+.view-site:hover{background:rgba(201,169,110,.1)}
+.content{padding:1.8rem;flex:1}
+
+/* TABS */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* CARDS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.8rem}
+.stat-card{background:var(--dark2);border:1px solid rgba(201,169,110,.12);padding:1.2rem 1.4rem;border-radius:4px}
+.stat-num{font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-lbl{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.4);margin-top:.3rem}
+
+/* SECTION CARD */
+.card{background:var(--dark2);border:1px solid rgba(201,169,110,.12);border-radius:4px;margin-bottom:1.4rem}
+.card-head{padding:1rem 1.4rem;border-bottom:1px solid rgba(201,169,110,.1);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:.88rem;font-weight:600;color:var(--ivory)}
+.card-body{padding:1.4rem}
+
+/* BUTTONS */
+.btn{padding:.55rem 1.1rem;border:none;cursor:pointer;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:all .2s;font-weight:600}
+.btn-gold{background:var(--gold);color:var(--dark)}
+.btn-gold:hover{background:var(--gold-lt)}
+.btn-outline{background:transparent;border:1px solid rgba(201,169,110,.3);color:var(--gold)}
+.btn-outline:hover{background:rgba(201,169,110,.1)}
+.btn-red{background:rgba(224,85,85,.15);border:1px solid rgba(224,85,85,.3);color:var(--red)}
+.btn-red:hover{background:rgba(224,85,85,.25)}
+.btn-green{background:rgba(85,184,85,.15);border:1px solid rgba(85,184,85,.3);color:var(--green)}
+.btn-green:hover{background:rgba(85,184,85,.25)}
+.btn-sm{padding:.35rem .7rem;font-size:.65rem}
+
+/* FORMS */
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.45);margin-bottom:.4rem}
+.fg input,.fg textarea,.fg select{width:100%;padding:.7rem .9rem;background:rgba(26,20,16,.8);border:1px solid rgba(201,169,110,.18);color:var(--ivory);font-size:.85rem;outline:none;border-radius:2px;font-family:inherit;transition:border-color .3s}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:rgba(201,169,110,.5)}
+.fg textarea{resize:vertical;min-height:80px}
+.fg select option{background:#2d2318}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th{text-align:left;padding:.6rem .9rem;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.4);border-bottom:1px solid rgba(201,169,110,.12)}
+td{padding:.75rem .9rem;border-bottom:1px solid rgba(201,169,110,.07);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(201,169,110,.04)}
+.badge{display:inline-block;padding:.2rem .55rem;border-radius:999px;font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.badge-green{background:rgba(85,184,85,.15);color:var(--green)}
+.badge-red{background:rgba(224,85,85,.15);color:var(--red)}
+.badge-gold{background:rgba(201,169,110,.15);color:var(--gold)}
+.badge-blue{background:rgba(85,136,224,.15);color:var(--blue)}
+
+/* GALLERY GRID */
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem}
+.img-item{position:relative;aspect-ratio:2/3;border-radius:3px;overflow:hidden;background:var(--dark3)}
+.img-item img{width:100%;height:100%;object-fit:cover}
+.img-item .img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+.img-item:hover .img-overlay{opacity:1}
+.img-caption{position:absolute;bottom:0;left:0;right:0;padding:.5rem .6rem;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);font-size:.7rem;color:#fff}
+
+/* HERO SLIDES GRID */
+.slide-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem}
+.slide-item{position:relative;aspect-ratio:16/9;border-radius:3px;overflow:hidden;background:var(--dark3)}
+.slide-item img{width:100%;height:100%;object-fit:cover}
+.slide-item .img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.slide-item:hover .img-overlay{opacity:1}
+
+/* REVIEW CARD */
+.review-card{background:var(--dark3);border:1px solid rgba(201,169,110,.1);border-radius:3px;padding:1rem 1.2rem;margin-bottom:.8rem}
+.review-quote{font-style:italic;color:rgba(250,246,240,.75);font-size:.88rem;line-height:1.7;margin-bottom:.7rem}
+.review-meta{font-size:.72rem;color:var(--gold)}
+.review-actions{display:flex;gap:.5rem;margin-top:.8rem}
+
+/* PACKAGE EDITOR */
+.pkg-editor{background:var(--dark3);border:1px solid rgba(201,169,110,.1);border-radius:3px;padding:1.2rem;margin-bottom:1rem}
+.pkg-editor h4{font-size:.88rem;color:var(--gold);margin-bottom:1rem}
+.section-row{display:flex;align-items:flex-start;gap:.8rem;margin-bottom:.7rem;background:rgba(26,20,16,.5);padding:.7rem;border-radius:2px}
+.section-row textarea{flex:1;min-height:60px}
+.items-list{display:flex;flex-direction:column;gap:.4rem;margin-top:.5rem}
+.item-row{display:flex;gap:.4rem}
+.item-row input{flex:1}
+
+/* CONTACT VIEW */
+.contact-card{background:var(--dark3);border:1px solid rgba(201,169,110,.1);border-radius:3px;padding:1.2rem;margin-bottom:.8rem}
+.contact-card.unread{border-left:3px solid var(--gold)}
+.contact-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem}
+.contact-name{font-weight:600;font-size:.95rem}
+.contact-details{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.78rem;color:rgba(250,246,240,.6);margin-bottom:.7rem}
+.contact-msg{font-size:.82rem;color:rgba(250,246,240,.75);line-height:1.7;background:rgba(0,0,0,.2);padding:.7rem;border-radius:2px}
+
+/* UPLOAD AREA */
+.upload-area{border:2px dashed rgba(201,169,110,.25);border-radius:4px;padding:2rem;text-align:center;cursor:pointer;transition:border-color .3s;background:rgba(201,169,110,.03)}
+.upload-area:hover{border-color:rgba(201,169,110,.5)}
+.upload-area .icon{font-size:2rem;margin-bottom:.5rem}
+.upload-area p{font-size:.8rem;color:rgba(250,246,240,.45)}
+.upload-area input{display:none}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;padding:.8rem 1.4rem;border-radius:4px;font-size:.82rem;z-index:9999;animation:slideIn .3s;display:none}
+.toast.show{display:block}
+.toast.success{background:#1a3a1a;border:1px solid var(--green);color:var(--green)}
+.toast.error{background:#3a1a1a;border:1px solid var(--red);color:var(--red)}
+@keyframes slideIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+/* LOADING SPINNER */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(201,169,110,.3);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.4rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
+.loading-overlay.show{display:flex}
+.loading-box{background:var(--dark2);padding:2rem 3rem;border-radius:4px;text-align:center;border:1px solid rgba(201,169,110,.2)}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:3rem 1rem;color:rgba(250,246,240,.3);font-size:.85rem}
+.empty .icon{font-size:2.5rem;margin-bottom:.8rem;display:block}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{width:60px}
+  .sidebar .s-logo small,.sidebar .nav-item span,.sidebar .s-user,.sidebar .logout-btn{display:none}
+  .sidebar .nav-item{justify-content:center;padding:.75rem}
+  .sidebar .nav-badge{display:none}
+  .main{margin-left:60px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="s-logo">
+    <span>Eternelle</span>
+    <small>Admin Panel</small>
+  </div>
+  <nav>
+    <div class="nav-item active" onclick="showTab('dashboard')"><span class="icon">📊</span><span>Dashboard</span></div>
+    <div class="nav-item" onclick="showTab('hero')"><span class="icon">🖼️</span><span>Hero Slides</span></div>
+    <div class="nav-item" onclick="showTab('gallery')"><span class="icon">📸</span><span>Gallery</span></div>
+    <div class="nav-item" onclick="showTab('reviews')"><span class="icon">⭐</span><span>Reviews</span><span class="nav-badge" id="review-badge" style="display:none">0</span></div>
+    <div class="nav-item" onclick="showTab('contacts')"><span class="icon">📩</span><span>Contacts</span><span class="nav-badge" id="contact-badge" style="display:none">0</span></div>
+    <div class="nav-item" onclick="showTab('packages')"><span class="icon">📦</span><span>Packages</span></div>
+    <div class="nav-item" onclick="showTab('services')"><span class="icon">🛎️</span><span>Services</span></div>
+  </nav>
+  <div class="s-footer">
+    <div class="s-user" id="user-email">Loading...</div>
+    <button class="logout-btn" onclick="logout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="page-title">Dashboard</div>
+    <div class="topbar-right">
+      <a href="../index.html" target="_blank" class="view-site">View Site ↗</a>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="stat-gallery">—</div><div class="stat-lbl">Gallery Photos</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-reviews">—</div><div class="stat-lbl">Pending Reviews</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-contacts">—</div><div class="stat-lbl">New Enquiries</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-slides">—</div><div class="stat-lbl">Hero Slides</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">Recent Enquiries</div><button class="btn btn-outline btn-sm" onclick="showTab('contacts')">View All</button></div>
+        <div class="card-body"><div id="dash-contacts"><div class="empty"><span class="icon">📩</span>Loading...</div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">Pending Reviews</div><button class="btn btn-outline btn-sm" onclick="showTab('reviews')">View All</button></div>
+        <div class="card-body"><div id="dash-reviews"><div class="empty"><span class="icon">⭐</span>Loading...</div></div></div>
+      </div>
+    </div>
+
+    <!-- HERO SLIDES -->
+    <div class="tab-content" id="tab-hero">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Hero Slideshow Images</div>
+          <button class="btn btn-gold btn-sm" onclick="openUpload('hero')">+ Add Slide</button>
+        </div>
+        <div class="card-body">
+          <p style="font-size:.78rem;color:rgba(250,246,240,.4);margin-bottom:1rem">These are the background images on the hero section. Recommended size: 1600×900px or wider.</p>
+          <div class="slide-grid" id="hero-grid"><div class="empty"><span class="icon">🖼️</span>No slides yet</div></div>
+        </div>
+      </div>
+      <!-- Upload form -->
+      <div class="card" id="hero-upload-card" style="display:none">
+        <div class="card-head"><div class="card-title">Upload New Slide</div></div>
+        <div class="card-body">
+          <div class="upload-area" onclick="document.getElementById('hero-file').click()">
+            <div class="icon">☁️</div>
+            <p>Click to select an image<br><small>JPG, PNG — max 5MB</small></p>
+            <input type="file" id="hero-file" accept="image/*" onchange="previewFile('hero-preview','hero-file')">
+          </div>
+          <img id="hero-preview" style="display:none;max-height:160px;margin-top:.8rem;border-radius:3px">
+          <div class="fg" style="margin-top:1rem">
+            <label>Sort Order</label>
+            <input type="number" id="hero-order" value="0" min="0">
+          </div>
+          <div style="display:flex;gap:.8rem;margin-top:.5rem">
+            <button class="btn btn-gold" onclick="uploadHeroSlide()">Upload & Save</button>
+            <button class="btn btn-outline" onclick="closeUpload('hero')">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="tab-content" id="tab-gallery">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Gallery Photos</div>
+          <button class="btn btn-gold btn-sm" onclick="openUpload('gallery')">+ Add Photo</button>
+        </div>
+        <div class="card-body">
+          <div class="img-grid" id="gallery-grid"><div class="empty"><span class="icon">📸</span>No photos yet</div></div>
+        </div>
+      </div>
+      <div class="card" id="gallery-upload-card" style="display:none">
+        <div class="card-head"><div class="card-title">Add Gallery Photo</div></div>
+        <div class="card-body">
+          <div class="upload-area" onclick="document.getElementById('gallery-file').click()">
+            <div class="icon">☁️</div>
+            <p>Click to select a photo<br><small>JPG, PNG — max 5MB</small></p>
+            <input type="file" id="gallery-file" accept="image/*" onchange="previewFile('gallery-preview','gallery-file')">
+          </div>
+          <img id="gallery-preview" style="display:none;max-height:200px;margin-top:.8rem;border-radius:3px">
+          <div class="form-row" style="margin-top:1rem">
+            <div class="fg"><label>Tag (e.g. Wedding, Decor)</label><input type="text" id="gal-tag" placeholder="Wedding"></div>
+            <div class="fg"><label>Couple / Caption</label><input type="text" id="gal-couple" placeholder="Priya & Arjun"></div>
+          </div>
+          <div class="fg">
+            <label>Sort Order</label>
+            <input type="number" id="gal-order" value="0" min="0">
+          </div>
+          <div style="display:flex;gap:.8rem">
+            <button class="btn btn-gold" onclick="uploadGallery()">Upload & Save</button>
+            <button class="btn btn-outline" onclick="closeUpload('gallery')">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="tab-content" id="tab-reviews">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Add New Review</div>
+          <button class="btn btn-outline btn-sm" onclick="toggleAddReview()">+ Add Manually</button>
+        </div>
+        <div class="card-body" id="add-review-form" style="display:none">
+          <div class="fg"><label>Customer Quote</label><textarea id="rev-quote" placeholder="Write the review here..."></textarea></div>
+          <div class="form-row">
+            <div class="fg"><label>Author Name</label><input type="text" id="rev-author" placeholder="Priya & Arjun Sharma"></div>
+            <div class="fg"><label>Occasion / Event</label><input type="text" id="rev-occasion" placeholder="Wedding, March 2024"></div>
+          </div>
+          <div style="display:flex;gap:.8rem">
+            <button class="btn btn-gold" onclick="addReview()">Save Review</button>
+            <button class="btn btn-outline" onclick="toggleAddReview()">Cancel</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">Pending Approval</div></div>
+        <div class="card-body" id="pending-reviews"><div class="empty"><span class="icon">⭐</span>No pending reviews</div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-title">Approved Reviews</div></div>
+        <div class="card-body" id="approved-reviews"><div class="empty"><span class="icon">✅</span>No approved reviews yet</div></div>
+      </div>
+    </div>
+
+    <!-- CONTACTS -->
+    <div class="tab-content" id="tab-contacts">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Contact Enquiries</div>
+          <div style="display:flex;gap:.5rem">
+            <button class="btn btn-outline btn-sm" onclick="filterContacts('all')">All</button>
+            <button class="btn btn-outline btn-sm" onclick="filterContacts('unread')">Unread</button>
+          </div>
+        </div>
+        <div class="card-body" id="contacts-list"><div class="empty"><span class="icon">📩</span>No enquiries yet</div></div>
+      </div>
+    </div>
+
+    <!-- PACKAGES -->
+    <div class="tab-content" id="tab-packages">
+      <div class="card">
+        <div class="card-head"><div class="card-title">Manage Packages</div><button class="btn btn-gold btn-sm" onclick="savePackages()">💾 Save All Changes</button></div>
+        <div class="card-body" id="packages-editor"><div class="empty"><span class="icon">📦</span>Loading...</div></div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="tab-content" id="tab-services">
+      <div class="card">
+        <div class="card-head"><div class="card-title">Manage Services</div></div>
+        <div class="card-body">
+          <table>
+            <thead><tr><th>#</th><th>Title</th><th>Description</th><th>Image URL</th><th>Actions</th></tr></thead>
+            <tbody id="services-table"><tr><td colspan="5" style="text-align:center;padding:2rem;color:rgba(250,246,240,.3)">Loading...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" id="edit-service-card" style="display:none">
+        <div class="card-head"><div class="card-title">Edit Service</div></div>
+        <div class="card-body">
+          <input type="hidden" id="svc-id">
+          <div class="form-row">
+            <div class="fg"><label>Number</label><input type="text" id="svc-num" placeholder="01"></div>
+            <div class="fg"><label>Title</label><input type="text" id="svc-title" placeholder="Decor"></div>
+          </div>
+          <div class="fg"><label>Description</label><textarea id="svc-desc"></textarea></div>
+          <div class="fg"><label>Image URL</label><input type="text" id="svc-img" placeholder="images/svc-decor.jpg"></div>
+          <div style="display:flex;gap:.8rem">
+            <button class="btn btn-gold" onclick="saveService()">Save Service</button>
+            <button class="btn btn-outline" onclick="document.getElementById('edit-service-card').style.display='none'">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+<!-- LOADING -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-box"><div class="spinner"></div> Processing...</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── CONFIGURE YOUR SUPABASE CREDENTIALS HERE ──
+const SUPABASE_URL = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzU4NDIyNiwiZXhwIjoyMDg5MTYwMjI2fQ._6DMY8GUCS5hRz_ozpZPM89GKK6NcH_xggqmbvQ7RzA'; // for admin writes
+const BUCKET = 'eternelle-images';
+// ──────────────────────────────────────────────
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+let allContacts = [];
+
+// ── AUTH CHECK ──
+async function init(){
+  const {data:{session}} = await sb.auth.getSession();
+  if(!session){ window.location.href='index.html'; return; }
+  document.getElementById('user-email').textContent = session.user.email;
+  loadDashboard();
+  loadHeroSlides();
+  loadGallery();
+  loadReviews();
+  loadContacts();
+  loadPackages();
+  loadServices();
+}
+
+async function logout(){
+  await sb.auth.signOut();
+  window.location.href='index.html';
+}
+
+// ── NAVIGATION ──
+const tabTitles = {dashboard:'Dashboard',hero:'Hero Slides',gallery:'Gallery',reviews:'Reviews',contacts:'Contacts',packages:'Packages',services:'Services'};
+function showTab(id){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item')[['dashboard','hero','gallery','reviews','contacts','packages','services'].indexOf(id)].classList.add('active');
+  document.getElementById('page-title').textContent = tabTitles[id];
+}
+
+// ── TOAST ──
+function toast(msg, type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast show '+type;
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── LOADING ──
+function loading(show){ document.getElementById('loading-overlay').classList.toggle('show',show); }
+
+// ── FILE PREVIEW ──
+function previewFile(previewId, inputId){
+  const f=document.getElementById(inputId).files[0];
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{const img=document.getElementById(previewId);img.src=e.target.result;img.style.display='block'};
+  r.readAsDataURL(f);
+}
+
+// ── UPLOAD TOGGLE ──
+function openUpload(type){ document.getElementById(type+'-upload-card').style.display='block'; }
+function closeUpload(type){ document.getElementById(type+'-upload-card').style.display='none'; }
+
+// ── UPLOAD FILE TO STORAGE ──
+async function uploadFile(file, folder){
+  const ext = file.name.split('.').pop();
+  const path = `${folder}/${Date.now()}.${ext}`;
+  const {error} = await sb.storage.from(BUCKET).upload(path, file, {contentType:file.type});
+  if(error) throw error;
+  const {data} = sb.storage.from(BUCKET).getPublicUrl(path);
+  return data.publicUrl;
+}
+
+// ── DASHBOARD ──
+async function loadDashboard(){
+  const [g,r,c,h] = await Promise.all([
+    sb.from('gallery').select('id',{count:'exact'}),
+    sb.from('reviews').select('id',{count:'exact'}).eq('approved',false),
+    sb.from('contacts').select('id',{count:'exact'}).eq('is_read',false),
+    sb.from('hero_slides').select('id',{count:'exact'}).eq('active',true)
+  ]);
+  document.getElementById('stat-gallery').textContent = g.count||0;
+  document.getElementById('stat-reviews').textContent = r.count||0;
+  document.getElementById('stat-contacts').textContent = c.count||0;
+  document.getElementById('stat-slides').textContent = h.count||0;
+  updateBadges(r.count||0, c.count||0);
+
+  // Recent contacts
+  const {data:contacts} = await sb.from('contacts').select('*').order('created_at',{ascending:false}).limit(5);
+  const cc = document.getElementById('dash-contacts');
+  if(!contacts?.length){ cc.innerHTML='<div class="empty"><span class="icon">📩</span>No enquiries yet</div>'; return; }
+  cc.innerHTML = contacts.map(c=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(201,169,110,.07)">
+      <div>
+        <div style="font-size:.85rem;font-weight:600">${c.your_name||'Unknown'} ${c.partner_name?'& '+c.partner_name:''}</div>
+        <div style="font-size:.72rem;color:rgba(250,246,240,.4)">${c.email||''} · ${c.event_type||''}</div>
+      </div>
+      <span class="badge ${c.is_read?'badge-gold':'badge-green'}">${c.is_read?'Read':'New'}</span>
+    </div>`).join('');
+
+  // Pending reviews
+  const {data:revs} = await sb.from('reviews').select('*').eq('approved',false).order('created_at',{ascending:false}).limit(3);
+  const dr = document.getElementById('dash-reviews');
+  if(!revs?.length){ dr.innerHTML='<div class="empty"><span class="icon">⭐</span>No pending reviews</div>'; return; }
+  dr.innerHTML = revs.map(r=>`
+    <div style="padding:.65rem 0;border-bottom:1px solid rgba(201,169,110,.07)">
+      <div style="font-size:.82rem;font-style:italic;color:rgba(250,246,240,.7)">"${r.quote?.substring(0,100)}..."</div>
+      <div style="font-size:.72rem;color:var(--gold);margin-top:.3rem">${r.author}</div>
+    </div>`).join('');
+}
+
+function updateBadges(revCount, contactCount){
+  const rb=document.getElementById('review-badge');
+  const cb=document.getElementById('contact-badge');
+  rb.style.display=revCount>0?'inline':'none'; rb.textContent=revCount;
+  cb.style.display=contactCount>0?'inline':'none'; cb.textContent=contactCount;
+}
+
+// ── HERO SLIDES ──
+async function loadHeroSlides(){
+  const {data} = await sb.from('hero_slides').select('*').order('sort_order');
+  const grid = document.getElementById('hero-grid');
+  if(!data?.length){ grid.innerHTML='<div class="empty"><span class="icon">🖼️</span>No slides yet. Add your first slide!</div>'; return; }
+  grid.innerHTML = data.map(s=>`
+    <div class="slide-item">
+      <img src="${s.image_url}" onerror="this.src='https://via.placeholder.com/300x169?text=No+Image'">
+      <div class="img-overlay">
+        <button class="btn btn-sm ${s.active?'btn-red':'btn-green'}" onclick="toggleHeroSlide('${s.id}',${s.active})">${s.active?'Disable':'Enable'}</button>
+        <button class="btn btn-red btn-sm" onclick="deleteHeroSlide('${s.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+async function uploadHeroSlide(){
+  const file = document.getElementById('hero-file').files[0];
+  const order = parseInt(document.getElementById('hero-order').value)||0;
+  if(!file){ toast('Please select an image','error'); return; }
+  loading(true);
+  try {
+    const url = await uploadFile(file,'hero');
+    await sb.from('hero_slides').insert({image_url:url,sort_order:order,active:true});
+    toast('Slide uploaded!');
+    closeUpload('hero');
+    loadHeroSlides();
+    loadDashboard();
+  } catch(e){ toast(e.message,'error'); }
+  loading(false);
+}
+
+async function toggleHeroSlide(id, current){
+  await sb.from('hero_slides').update({active:!current}).eq('id',id);
+  toast(current?'Slide disabled':'Slide enabled');
+  loadHeroSlides();
+}
+
+async function deleteHeroSlide(id){
+  if(!confirm('Delete this slide?')) return;
+  await sb.from('hero_slides').delete().eq('id',id);
+  toast('Slide deleted');
+  loadHeroSlides();
+  loadDashboard();
+}
+
+// ── GALLERY ──
+async function loadGallery(){
+  const {data} = await sb.from('gallery').select('*').order('sort_order');
+  const grid = document.getElementById('gallery-grid');
+  if(!data?.length){ grid.innerHTML='<div class="empty"><span class="icon">📸</span>No photos yet. Add your first!</div>'; return; }
+  grid.innerHTML = data.map(g=>`
+    <div class="img-item">
+      <img src="${g.image_url}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Image'">
+      <div class="img-overlay">
+        <button class="btn btn-red btn-sm" onclick="deleteGallery('${g.id}')">Delete</button>
+        <button class="btn btn-sm btn-outline" onclick="toggleGallery('${g.id}',${g.active})">${g.active?'Hide':'Show'}</button>
+      </div>
+      <div class="img-caption">${g.couple_name||g.tag||''}</div>
+    </div>`).join('');
+}
+
+async function uploadGallery(){
+  const file = document.getElementById('gallery-file').files[0];
+  const tag = document.getElementById('gal-tag').value;
+  const couple = document.getElementById('gal-couple').value;
+  const order = parseInt(document.getElementById('gal-order').value)||0;
+  if(!file){ toast('Please select a photo','error'); return; }
+  loading(true);
+  try {
+    const url = await uploadFile(file,'gallery');
+    await sb.from('gallery').insert({image_url:url,tag,couple_name:couple,sort_order:order,active:true});
+    toast('Photo uploaded!');
+    closeUpload('gallery');
+    loadGallery();
+    loadDashboard();
+  } catch(e){ toast(e.message,'error'); }
+  loading(false);
+}
+
+async function deleteGallery(id){
+  if(!confirm('Delete this photo?')) return;
+  await sb.from('gallery').delete().eq('id',id);
+  toast('Photo deleted');
+  loadGallery();
+}
+
+async function toggleGallery(id, current){
+  await sb.from('gallery').update({active:!current}).eq('id',id);
+  toast(current?'Photo hidden':'Photo shown');
+  loadGallery();
+}
+
+// ── REVIEWS ──
+let addReviewOpen = false;
+function toggleAddReview(){
+  addReviewOpen=!addReviewOpen;
+  document.getElementById('add-review-form').style.display=addReviewOpen?'block':'none';
+}
+
+async function loadReviews(){
+  const {data:pending} = await sb.from('reviews').select('*').eq('approved',false).order('created_at',{ascending:false});
+  const {data:approved} = await sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false});
+
+  const pr = document.getElementById('pending-reviews');
+  pr.innerHTML = pending?.length ? pending.map(r=>reviewCard(r,false)).join('') : '<div class="empty"><span class="icon">⭐</span>No pending reviews</div>';
+
+  const ar = document.getElementById('approved-reviews');
+  ar.innerHTML = approved?.length ? approved.map(r=>reviewCard(r,true)).join('') : '<div class="empty"><span class="icon">✅</span>No approved reviews</div>';
+
+  updateBadges(pending?.length||0, 0);
+}
+
+function reviewCard(r, isApproved){
+  return `<div class="review-card">
+    <div class="review-quote">"${r.quote}"</div>
+    <div class="review-meta">${r.author} · ${r.occasion||''}</div>
+    <div class="review-actions">
+      ${!isApproved ? `<button class="btn btn-green btn-sm" onclick="approveReview('${r.id}')">✓ Approve</button>` : `<span class="badge badge-green">Approved</span>`}
+      <button class="btn btn-red btn-sm" onclick="deleteReview('${r.id}')">Delete</button>
+    </div>
+  </div>`;
+}
+
+async function addReview(){
+  const quote = document.getElementById('rev-quote').value.trim();
+  const author = document.getElementById('rev-author').value.trim();
+  const occasion = document.getElementById('rev-occasion').value.trim();
+  if(!quote||!author){ toast('Quote and author are required','error'); return; }
+  loading(true);
+  await sb.from('reviews').insert({quote,author,occasion,approved:true});
+  toast('Review added!');
+  toggleAddReview();
+  document.getElementById('rev-quote').value='';
+  document.getElementById('rev-author').value='';
+  document.getElementById('rev-occasion').value='';
+  loadReviews();
+  loading(false);
+}
+
+async function approveReview(id){
+  await sb.from('reviews').update({approved:true}).eq('id',id);
+  toast('Review approved!');
+  loadReviews();
+  loadDashboard();
+}
+
+async function deleteReview(id){
+  if(!confirm('Delete this review?')) return;
+  await sb.from('reviews').delete().eq('id',id);
+  toast('Review deleted');
+  loadReviews();
+}
+
+// ── CONTACTS ──
+async function loadContacts(){
+  const {data} = await sb.from('contacts').select('*').order('created_at',{ascending:false});
+  allContacts = data||[];
+  renderContacts(allContacts);
+  const unread = allContacts.filter(c=>!c.is_read).length;
+  updateBadges(0, unread);
+  document.getElementById('stat-contacts').textContent = unread;
+}
+
+function filterContacts(type){
+  renderContacts(type==='unread' ? allContacts.filter(c=>!c.is_read) : allContacts);
+}
+
+function renderContacts(list){
+  const el = document.getElementById('contacts-list');
+  if(!list.length){ el.innerHTML='<div class="empty"><span class="icon">📩</span>No enquiries yet</div>'; return; }
+  el.innerHTML = list.map(c=>`
+    <div class="contact-card ${c.is_read?'':'unread'}">
+      <div class="contact-head">
+        <div class="contact-name">${c.your_name||'Unknown'} ${c.partner_name?'& '+c.partner_name:''}</div>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <span class="badge ${c.is_read?'badge-gold':'badge-green'}">${c.is_read?'Read':'New'}</span>
+          ${!c.is_read?`<button class="btn btn-outline btn-sm" onclick="markRead('${c.id}')">Mark Read</button>`:''}
+          <button class="btn btn-red btn-sm" onclick="deleteContact('${c.id}')">Delete</button>
+        </div>
+      </div>
+      <div class="contact-details">
+        <div>📧 ${c.email||'—'}</div>
+        <div>📞 ${c.phone||'—'}</div>
+        <div>📅 Event: ${c.event_date||'—'}</div>
+        <div>🎉 Type: ${c.event_type||'—'}</div>
+        <div>🛎️ Services: ${c.services||'—'}</div>
+        <div>🕒 ${new Date(c.created_at).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})}</div>
+      </div>
+      ${c.message?`<div class="contact-msg">${c.message}</div>`:''}
+    </div>`).join('');
+}
+
+async function markRead(id){
+  await sb.from('contacts').update({is_read:true}).eq('id',id);
+  toast('Marked as read');
+  loadContacts();
+}
+
+async function deleteContact(id){
+  if(!confirm('Delete this enquiry?')) return;
+  await sb.from('contacts').delete().eq('id',id);
+  toast('Enquiry deleted');
+  loadContacts();
+}
+
+// ── PACKAGES ──
+async function loadPackages(){
+  const {data} = await sb.from('packages').select('*').order('plan_number');
+  const editor = document.getElementById('packages-editor');
+  if(!data?.length){ editor.innerHTML='<div class="empty">No packages found</div>'; return; }
+  editor.innerHTML = data.map(pkg=>`
+    <div class="pkg-editor">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+        <h4>${pkg.plan_label} — ${pkg.name}</h4>
+        <label style="display:flex;align-items:center;gap:.5rem;font-size:.75rem;color:rgba(250,246,240,.5);cursor:pointer">
+          <input type="checkbox" ${pkg.is_featured?'checked':''} onchange="toggleFeatured('${pkg.id}',this.checked)"> Featured
+        </label>
+      </div>
+      <div class="fg"><label>Plan Label</label><input type="text" id="label-${pkg.id}" value="${pkg.plan_label||''}"></div>
+      <div class="form-row">
+        <div class="fg"><label>Name</label><input type="text" id="name-${pkg.id}" value="${pkg.name||''}"></div>
+        <div class="fg"><label>Subtitle</label><input type="text" id="sub-${pkg.id}" value="${pkg.subtitle||''}"></div>
+      </div>
+      <div style="margin-top:.5rem">
+        <label style="font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,246,240,.45);display:block;margin-bottom:.6rem">Sections (JSON — edit carefully)</label>
+        <textarea id="sections-${pkg.id}" style="width:100%;min-height:200px;background:rgba(0,0,0,.3);border:1px solid rgba(201,169,110,.15);color:var(--ivory);padding:.7rem;font-family:monospace;font-size:.75rem;border-radius:2px;outline:none">${JSON.stringify(pkg.sections,null,2)}</textarea>
+      </div>
+    </div>`).join('');
+}
+
+async function savePackages(){
+  const {data} = await sb.from('packages').select('id,plan_label');
+  loading(true);
+  let errors=0;
+  for(const pkg of data){
+    const label=document.getElementById('label-'+pkg.id)?.value;
+    const name=document.getElementById('name-'+pkg.id)?.value;
+    const sub=document.getElementById('sub-'+pkg.id)?.value;
+    let sections;
+    try{ sections=JSON.parse(document.getElementById('sections-'+pkg.id)?.value); }
+    catch(e){ toast('Invalid JSON in '+pkg.plan_label,'error'); errors++; continue; }
+    await sb.from('packages').update({plan_label:label,name,subtitle:sub,sections,updated_at:new Date().toISOString()}).eq('id',pkg.id);
+  }
+  loading(false);
+  if(!errors) toast('All packages saved!');
+}
+
+async function toggleFeatured(id, val){
+  await sb.from('packages').update({is_featured:val}).eq('id',id);
+  toast(val?'Set as featured':'Removed featured');
+}
+
+// ── SERVICES ──
+async function loadServices(){
+  const {data} = await sb.from('services').select('*').order('sort_order');
+  const tbody = document.getElementById('services-table');
+  if(!data?.length){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:2rem;color:rgba(250,246,240,.3)">No services found</td></tr>'; return; }
+  tbody.innerHTML = data.map(s=>`
+    <tr>
+      <td><span class="badge badge-gold">${s.number}</span></td>
+      <td style="font-weight:600">${s.title}</td>
+      <td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:rgba(250,246,240,.55)">${s.description||''}</td>
+      <td style="font-size:.72rem;color:rgba(250,246,240,.4)">${s.image_url||'—'}</td>
+      <td>
+        <button class="btn btn-outline btn-sm" onclick="editService(${JSON.stringify(s).replace(/"/g,'&quot;')})">Edit</button>
+        <button class="btn btn-sm ${s.active?'btn-red':'btn-green'}" onclick="toggleService('${s.id}',${s.active})" style="margin-left:.3rem">${s.active?'Hide':'Show'}</button>
+      </td>
+    </tr>`).join('');
+}
+
+function editService(s){
+  document.getElementById('svc-id').value=s.id;
+  document.getElementById('svc-num').value=s.number;
+  document.getElementById('svc-title').value=s.title;
+  document.getElementById('svc-desc').value=s.description;
+  document.getElementById('svc-img').value=s.image_url||'';
+  document.getElementById('edit-service-card').style.display='block';
+  document.getElementById('edit-service-card').scrollIntoView({behavior:'smooth'});
+}
+
+async function saveService(){
+  const id=document.getElementById('svc-id').value;
+  const number=document.getElementById('svc-num').value;
+  const title=document.getElementById('svc-title').value;
+  const description=document.getElementById('svc-desc').value;
+  const image_url=document.getElementById('svc-img').value;
+  loading(true);
+  await sb.from('services').update({number,title,description,image_url,updated_at:new Date().toISOString()}).eq('id',id);
+  toast('Service updated!');
+  document.getElementById('edit-service-card').style.display='none';
+  loadServices();
+  loading(false);
+}
+
+async function toggleService(id, current){
+  await sb.from('services').update({active:!current}).eq('id',id);
+  toast(current?'Service hidden':'Service shown');
+  loadServices();
+}
+
+// ── START ──
+init();
+</script>
+</body>
+</html>

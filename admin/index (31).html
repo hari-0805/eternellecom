@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternelle — Admin Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{background:#0a0806;color:#faf6f0;font-family:'Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.box{background:#1a1410;border:1px solid rgba(201,169,110,.2);padding:3rem 2.5rem;width:100%;max-width:420px;border-radius:4px}
+.logo{font-family:Georgia,serif;font-size:2rem;color:#c9a96e;text-align:center;margin-bottom:.3rem;font-style:italic}
+.sub{text-align:center;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,246,240,.35);margin-bottom:2.5rem}
+.fg{margin-bottom:1.4rem}
+label{display:block;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,246,240,.45);margin-bottom:.5rem}
+input{width:100%;padding:.85rem 1rem;background:rgba(26,20,16,.8);border:1px solid rgba(201,169,110,.18);color:#faf6f0;font-size:.95rem;outline:none;border-radius:2px;transition:border-color .3s}
+input:focus{border-color:rgba(201,169,110,.5)}
+.btn{width:100%;padding:.9rem;background:#c9a96e;color:#1a1410;border:none;cursor:pointer;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-top:.5rem;border-radius:2px;transition:background .3s}
+.btn:hover{background:#e8d5a3}
+.err{background:rgba(200,50,50,.15);border:1px solid rgba(200,50,50,.3);color:#ff8080;padding:.75rem 1rem;font-size:.82rem;border-radius:2px;margin-bottom:1.2rem;display:none}
+.err.show{display:block}
+.loading{display:none;text-align:center;color:rgba(201,169,110,.6);font-size:.8rem;margin-top:.8rem}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="logo">Eternelle</div>
+  <div class="sub">Admin Panel</div>
+  <div class="err" id="err"></div>
+  <div class="fg">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="admin@eternelle.in">
+  </div>
+  <div class="fg">
+    <label>Password</label>
+    <input type="password" id="pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+  </div>
+  <button class="btn" onclick="login()">Sign In</button>
+  <div class="loading" id="loading">Signing in...</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── CONFIGURE YOUR SUPABASE CREDENTIALS HERE ──
+const SUPABASE_URL = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
+// ──────────────────────────────────────────────
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// If already logged in, redirect
+sb.auth.getSession().then(({data:{session}})=>{
+  if(session) window.location.href='dashboard.html';
+});
+
+async function login(){
+  const email=document.getElementById('email').value.trim();
+  const pass=document.getElementById('pass').value;
+  const err=document.getElementById('err');
+  const loading=document.getElementById('loading');
+  err.classList.remove('show');
+  if(!email||!pass){err.textContent='Please enter email and password.';err.classList.add('show');return;}
+  loading.style.display='block';
+  const {error}=await sb.auth.signInWithPassword({email,password:pass});
+  loading.style.display='none';
+  if(error){err.textContent=error.message;err.classList.add('show');}
+  else window.location.href='dashboard.html';
+}
+</script>
+</body>
+</html>

@@ -375,12 +375,12 @@ tr:hover td{background:rgba(201,169,110,.04)}
 <script>
 // ── CONFIGURE YOUR SUPABASE CREDENTIALS HERE ──
 const SUPABASE_URL = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_8cBu--8bHfzK0aIJmCPIHg_q6Q2vAar';
-const SUPABASE_SERVICE_KEY = 'sb_publishable_8cBu--8bHfzK0aIJmCPIHg_q6Q2vAar'; // for admin writes
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzU4NDIyNiwiZXhwIjoyMDg5MTYwMjI2fQ._6DMY8GUCS5hRz_ozpZPM89GKK6NcH_xggqmbvQ7RzA'; // for admin writes
 const BUCKET = 'eternelle-images';
 // ──────────────────────────────────────────────
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {auth:{persistSession:true}});
+const sb = supabase.createClient('https://jmxtlrytqrkzpxmevhrs.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzU4NDIyNiwiZXhwIjoyMDg5MTYwMjI2fQ._6DMY8GUCS5hRz_ozpZPM89GKK6NcH_xggqmbvQ7RzA');
 let allContacts = [];
 
 // ── AUTH CHECK ──

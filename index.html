@@ -1092,7 +1092,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
 // CURSOR — desktop/mouse only
 var isMouse = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
 if(isMouse){
@@ -1158,80 +1159,62 @@ function toggleFaq(btn){
   if(!isOpen) item.classList.add('open');
 }
 
-// ── SUPABASE DYNAMIC CONTENT ──
+// ── SUPABASE CLIENT ──
 const SB_URL = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
-async function sbFetch(table, query){
-  const res = await fetch(`${SB_URL}/rest/v1/${table}?${query}`, {
-    headers:{
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY,
-      'Content-Type': 'application/json'
-    }
-  });
-  if(!res.ok) throw new Error('Fetch failed: ' + res.status);
-  return res.json();
+async function sbFetch(table, filters){
+  let q = sb.from(table).select('*');
+  if(filters) Object.entries(filters).forEach(([k,v])=>{ q=q.eq(k,v); });
+  q = q.order('sort_order', {ascending:true, nullsFirst:false});
+  const {data,error} = await q;
+  if(error) throw error;
+  return data;
 }
 
 async function sbPost(table, data){
-  const res = await fetch(`${SB_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers:{
-      'apikey': SB_KEY,
-      'Authorization': 'Bearer ' + SB_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=minimal'
-    },
-    body: JSON.stringify(data)
-  });
-  if(!res.ok){
-    const err = await res.text();
-    throw new Error('Post failed: ' + res.status + ' — ' + err);
-  }
+  const {error} = await sb.from(table).insert(data);
+  if(error) throw error;
   return true;
 }
 
 // LOAD HERO SLIDES
 async function loadHeroSlides(){
   try {
-    const slides = await sbFetch('hero_slides','active=eq.true&order=sort_order.asc');
+    const {data:slides} = await sb.from('hero_slides').select('*').eq('active',true).order('sort_order');
     if(!slides||!slides.length) return;
     const wrap = document.querySelector('.slides');
     wrap.innerHTML = slides.map((s,i)=>`<div class="slide ${i===0?'active':''}" style="background-image:url('${s.image_url}')"></div>`).join('');
-    // reinit slideshow
     var sl=document.querySelectorAll('.slide'),cur_s=0;
     var dotWrap=document.getElementById('sdots');
     dotWrap.innerHTML='';
-    sl.forEach(function(_,i){var d=document.createElement('div');d.className='sdot'+(i===0?' active':'');d.onclick=function(){goSlide2(i,sl)};dotWrap.appendChild(d)});
-    function goSlide2(n,sl){sl[cur_s].classList.remove('active');document.querySelectorAll('.sdot')[cur_s].classList.remove('active');cur_s=n;sl[cur_s].classList.add('active');document.querySelectorAll('.sdot')[cur_s].classList.add('active')}
-    setInterval(function(){goSlide2((cur_s+1)%sl.length,sl)},4500);
-  } catch(e){ console.log('Hero slides fallback to static'); }
+    sl.forEach(function(_,i){var d=document.createElement('div');d.className='sdot'+(i===0?' active':'');d.onclick=function(){gS(i)};dotWrap.appendChild(d)});
+    function gS(n){sl[cur_s].classList.remove('active');document.querySelectorAll('.sdot')[cur_s].classList.remove('active');cur_s=n;sl[cur_s].classList.add('active');document.querySelectorAll('.sdot')[cur_s].classList.add('active')}
+    setInterval(function(){gS((cur_s+1)%sl.length)},4500);
+  } catch(e){ console.log('Hero slides: using static',e.message); }
 }
 
 // LOAD GALLERY
 async function loadGallery(){
   try {
-    const photos = await sbFetch('gallery','active=eq.true&order=sort_order.asc');
+    const {data:photos} = await sb.from('gallery').select('*').eq('active',true).order('sort_order');
     if(!photos||!photos.length) return;
     const scroll = document.querySelector('.gal-scroll');
     scroll.innerHTML = photos.map((p,i)=>{
       const offset = i===1?'margin-top:2.5rem':i===3?'margin-top:-2.5rem':'';
       return `<div class="gal-item" style="${offset}">
         <img class="gal-photo" src="${p.image_url}" alt="${p.tag||''}" loading="lazy">
-        <div class="gal-ov">
-          <div class="gal-tag">${p.tag||''}</div>
-          <div class="gal-name">${p.couple_name||''}</div>
-        </div>
+        <div class="gal-ov"><div class="gal-tag">${p.tag||''}</div><div class="gal-name">${p.couple_name||''}</div></div>
       </div>`;
     }).join('');
-  } catch(e){ console.log('Gallery fallback to static'); }
+  } catch(e){ console.log('Gallery: using static',e.message); }
 }
 
 // LOAD REVIEWS
 async function loadReviews(){
   try {
-    const reviews = await sbFetch('reviews','approved=eq.true&order=created_at.desc');
+    const {data:reviews} = await sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false});
     if(!reviews||!reviews.length) return;
     const slider = document.querySelector('.testi-slider');
     const dotsEl = document.querySelector('.dots');
@@ -1245,13 +1228,13 @@ async function loadReviews(){
     ct=0;
     clearInterval(window.testiInterval);
     window.testiInterval = setInterval(function(){showT((ct+1)%reviews.length)},5500);
-  } catch(e){ console.log('Reviews fallback to static'); }
+  } catch(e){ console.log('Reviews: using static',e.message); }
 }
 
 // LOAD PACKAGES
 async function loadPackages(){
   try {
-    const pkgs = await sbFetch('packages','order=plan_number.asc');
+    const {data:pkgs} = await sb.from('packages').select('*').order('plan_number');
     if(!pkgs||!pkgs.length) return;
     const grid = document.querySelector('.pkg-grid');
     grid.innerHTML = pkgs.map((p,i)=>`
@@ -1265,15 +1248,16 @@ async function loadPackages(){
           <div class="pkg-section-title">${sec.title}</div>
           <ul class="pkg-ul">${(sec.items||[]).map(it=>`<li>${it}</li>`).join('')}</ul>
         `).join('')}
-        <a href="#contact" class="pkg-cta">${p.is_featured?'Enquire Now':'Enquire Now'}</a>
+        <a href="#contact" class="pkg-cta">Enquire Now</a>
       </div>`).join('');
-  } catch(e){ console.log('Packages fallback to static'); }
+    document.querySelectorAll('.pkg-card.reveal').forEach(el=>io&&io.observe(el));
+  } catch(e){ console.log('Packages: using static',e.message); }
 }
 
 // LOAD SERVICES
 async function loadServices(){
   try {
-    const svcs = await sbFetch('services','active=eq.true&order=sort_order.asc');
+    const {data:svcs} = await sb.from('services').select('*').eq('active',true).order('sort_order');
     if(!svcs||!svcs.length) return;
     const grid = document.querySelector('.svc-grid');
     const icons = ['<path d="M24 4L44 14V34L24 44L4 34V14Z"/><circle cx="24" cy="24" r="7"/>','<rect x="6" y="12" width="36" height="26" rx="1"/><circle cx="24" cy="25" r="7"/>','<path d="M8 36C8 28 14 20 24 18C34 20 40 28 40 36Z"/>','<circle cx="14" cy="34" r="6"/><circle cx="34" cy="30" r="6"/><path d="M20 34V12L40 8V30"/>','<path d="M24 6L27.5 17H40L30 24.5L33.5 36L24 29L14.5 36L18 24.5L8 17H20.5Z"/>','<ellipse cx="24" cy="16" rx="10" ry="9"/><path d="M14 20C10 26 10 34 14 39C18 44 30 44 34 39C38 34 38 26 34 20"/>','<circle cx="10" cy="14" r="4"/><circle cx="22" cy="8" r="4"/><circle cx="34" cy="10" r="4"/><path d="M10 18Q16 28 22 24Q28 20 34 14"/>','<circle cx="24" cy="18" r="9"/><path d="M15 18C9 18 7 24 7 30H41C41 24 39 18 33 18"/>'];
@@ -1289,7 +1273,7 @@ async function loadServices(){
           <a href="#contact" class="svc-lnk">Explore</a>
         </div>
       </div>`).join('');
-  } catch(e){ console.log('Services fallback to static'); }
+  } catch(e){ console.log('Services: using static',e.message); }
 }
 
 // CONTACT FORM SUBMIT TO SUPABASE
@@ -1309,33 +1293,19 @@ async function submitContact(){
   };
   if(!data.your_name){ alert('Please enter your name.'); return; }
   if(!data.email){ alert('Please enter your email.'); return; }
-  btn.textContent='Sending...';
-  btn.disabled=true;
-  btn.style.opacity='.7';
-  try {
-    await sbPost('contacts', data);
+  btn.textContent='Sending...'; btn.disabled=true; btn.style.opacity='.7';
+  const {error} = await sb.from('contacts').insert(data);
+  if(error){
+    console.error('Contact error:',error);
+    btn.textContent='Failed — please try again';
+    btn.style.background='#e05555'; btn.style.opacity='1'; btn.disabled=false;
+    setTimeout(()=>{btn.textContent='Send My Enquiry';btn.style.background='';},4000);
+  } else {
     btn.textContent='✓ Sent! We will contact you soon.';
-    btn.style.background='#55b855';
-    btn.style.opacity='1';
-    // Clear form
+    btn.style.background='#55b855'; btn.style.opacity='1';
     document.querySelectorAll('.c-right input,.c-right textarea').forEach(el=>el.value='');
     document.querySelectorAll('.c-right select').forEach(el=>el.selectedIndex=0);
-    setTimeout(()=>{
-      btn.textContent='Send My Enquiry';
-      btn.style.background='';
-      btn.disabled=false;
-      btn.style.opacity='1';
-    },5000);
-  } catch(e){
-    console.error('Contact error:',e);
-    btn.textContent='Failed — please try again';
-    btn.style.background='#e05555';
-    btn.style.opacity='1';
-    btn.disabled=false;
-    setTimeout(()=>{
-      btn.textContent='Send My Enquiry';
-      btn.style.background='';
-    },4000);
+    setTimeout(()=>{btn.textContent='Send My Enquiry';btn.style.background='';btn.disabled=false;btn.style.opacity='1';},5000);
   }
 }
 

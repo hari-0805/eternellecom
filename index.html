@@ -11,14 +11,7 @@ html{scroll-behavior:smooth;font-size:17px}
 :root{--gold:#c9a96e;--gold-lt:#e8d5a3;--ivory:#faf6f0;--dark:#1a1410;--dark2:#2d2318}
 body{background:var(--dark);color:var(--ivory);font-family:'Josefin Sans',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.7}
 
-/* CURSOR — desktop only, hidden on touch */
-#cur,#ring{display:none}
-@media(hover:hover) and (pointer:fine){
-  #cur{display:block;width:9px;height:9px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999}
-  #ring{display:block;width:38px;height:38px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:.55;transition:width .3s,height .3s,opacity .3s}
-  body{cursor:none}
-  a,button,.sdot,.dot,.svc-card,.pkg-card,.gal-item,.si,.faq-q,.soc a,.fc ul a{cursor:none!important}
-}
+/* Cursor removed for standard OS pointer */
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:linear-gradient(to bottom,rgba(26,20,16,.96),transparent);transition:background .4s}
@@ -94,10 +87,10 @@ nav.scrolled{background:rgba(26,20,16,.98)}
   gap:.9rem;
   opacity:0;animation:fadeUp .9s 2s forwards;
 }
-.slide-dots{display:flex;justify-content:center;gap:.65rem;}
+.slide-dots{display:none;justify-content:center;gap:.65rem;}
 .sdot{width:6px;height:6px;border-radius:50%;background:rgba(250,246,240,.32);transition:background .4s,transform .4s;cursor:none}
 .sdot.active{background:var(--gold);transform:scale(1.5)}
-.scroll-hint{display:none;}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:.4rem;pointer-events:none;}
 .scroll-hint span{font-size:.6rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(250,246,240,.55);white-space:nowrap}
 .sl-wrap{width:1px;height:40px;overflow:hidden}
 .sl-line{width:1px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDown 2s ease-in-out infinite}
@@ -141,7 +134,7 @@ h2 em{font-style:italic;color:var(--gold)}
 .svc-hd p{font-size:.92rem;line-height:2;color:rgba(250,246,240,.52);margin-top:1.3rem}
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:1340px;margin:0 auto}
 .svc-card{position:relative;overflow:hidden;cursor:none;aspect-ratio:3/4;min-height:360px}
-.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.75) saturate(.95)}
+.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.65) saturate(.95)}
 .svc-card:hover .svc-photo{transform:scale(1.08);filter:brightness(.5) saturate(.85)}
 .svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.95) 0%,rgba(26,20,16,.35) 55%,transparent 100%);transition:background .4s}
 .svc-card:hover .svc-ov{background:linear-gradient(to top,rgba(45,35,24,.98) 0%,rgba(26,20,16,.6) 65%,rgba(26,20,16,.18) 100%)}
@@ -214,20 +207,20 @@ h2 em{font-style:italic;color:var(--gold)}
 .pkg-bg{background:linear-gradient(135deg,var(--dark),var(--dark2))}
 .pkg-hd{text-align:center;margin-bottom:4.5rem}
 .pkg-hd p{font-size:.9rem;color:rgba(250,246,240,.5);max-width:420px;margin:1.2rem auto 0;line-height:2}
-.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1200px;margin:0 auto;align-items:start}
-.pkg-card{padding:2rem 1.8rem;background:rgba(26,20,16,.78);position:relative;overflow:hidden;transition:transform .35s;cursor:none}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1100px;margin:0 auto}
+.pkg-card{padding:3rem 2.3rem;background:rgba(26,20,16,.78);position:relative;overflow:hidden;transition:transform .35s;cursor:none}
 .pkg-card:hover{transform:translateY(-5px)}
 .pkg-card.feat{background:linear-gradient(135deg,rgba(201,169,110,.1),rgba(201,169,110,.04));border:1px solid rgba(201,169,110,.28)}
 .pkg-badge{position:absolute;top:1.6rem;right:1.6rem;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:.25rem .7rem}
 .pkg-tier{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:.25rem;color:var(--ivory)}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:.35rem;color:var(--ivory)}
 .pkg-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(250,246,240,.42);margin-bottom:1.8rem;font-style:italic}
 .pkg-div{height:1px;background:rgba(201,169,110,.13);margin-bottom:1.7rem}
 .pkg-ul{list-style:none}
-.pkg-ul li{font-size:.76rem;padding:.4rem 0;color:rgba(250,246,240,.62);display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(196,154,122,.08)}
+.pkg-ul li{font-size:.8rem;padding:.6rem 0;color:rgba(250,246,240,.62);display:flex;align-items:center;gap:.7rem;border-bottom:1px solid rgba(196,154,122,.1)}
 .pkg-ul li::before{content:'◈';color:var(--gold);font-size:.5rem;flex-shrink:0}
-.pkg-section-title{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:.8rem 0 .3rem;font-weight:400}
-.pkg-sub{font-size:.72rem;color:rgba(250,246,240,.42);margin-bottom:.8rem;line-height:1.6;font-style:italic}
+.pkg-section-title{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:1.2rem 0 .5rem;font-weight:400}
+.pkg-sub{font-size:.75rem;color:rgba(250,246,240,.42);margin-bottom:1.2rem;line-height:1.7;font-style:italic}
 .pkg-cta{display:block;text-align:center;margin-top:2rem;padding:.9rem;border:1px solid rgba(201,169,110,.3);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:background .3s,color .3s}
 .pkg-cta:hover,.pkg-card.feat .pkg-cta{background:var(--gold);color:#fff0f0}
 
@@ -373,9 +366,6 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 </head>
 <body>
 
-<div id="cur"></div>
-<div id="ring"></div>
-
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="logo"><em>Eter</em>nelle</a>
@@ -383,7 +373,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#gallery">Portfolio</a></li>
-    <li><a href="#packages">Packages</a></li>
+    <li><a href="#packages">Our Plans</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Contact Us</a></li>
   </ul>
@@ -398,7 +388,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#services" onclick="closeMenu()">Services</a>
   <a href="#gallery" onclick="closeMenu()">Portfolio</a>
-  <a href="#packages" onclick="closeMenu()">Packages</a>
+  <a href="#packages" onclick="closeMenu()">Our Plans</a>
   <a href="#faq" onclick="closeMenu()">FAQ</a>
   <a href="#contact" class="m-cta" onclick="closeMenu()">Contact Us</a>
 </div>
@@ -423,6 +413,9 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   </div>
   <div class="hero-bottom">
     <div class="slide-dots" id="sdots"></div>
+    <div class="scroll-hint">
+      <div class="sl-wrap"><div class="sl-line"></div></div>
+    </div>
   </div>
 </section>
 
@@ -495,7 +488,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       </div>
     </div>
     <div class="svc-card reveal" style="transition-delay:.21s">
-      <img class="svc-photo" src="images/svc-dj.jpg" alt="DJ" loading="lazy" style="object-position:center center;transform:scale(1);transform-origin:center;object-fit:cover">
+      <img class="svc-photo" src="images/svc-dj.jpg" alt="DJ" loading="lazy" style="object-position:center center;transform:scale(0.85);transform-origin:center">
       <div class="svc-ov"></div><div class="svc-n">04</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="34" r="6"/><circle cx="34" cy="30" r="6"/><circle cx="14" cy="34" r="2"/><circle cx="34" cy="30" r="2"/><path d="M20 34V12L40 8V30"/></svg>
@@ -570,8 +563,8 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="si-ov"></div>
       <div class="si-lbl"><div class="si-tag">Catering</div><div class="si-title">Food &amp; Catering</div></div>
     </div>
-    <div class="si wide reveal" style="transition-delay:.25s">
-      <img src="images/show5.jpg" alt="DJ" loading="lazy" style="object-fit:cover;object-position:center">
+    <div class="si reveal" style="transition-delay:.25s">
+      <img src="images/show5.jpg" alt="DJ" loading="lazy">
       <div class="si-ov"></div>
       <div class="si-lbl"><div class="si-tag">DJ &amp; Music</div><div class="si-title">DJ Night</div></div>
     </div>
@@ -693,46 +686,13 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="pkg-sub">Best for intimate ceremonies up to 250 guests</div>
       <div class="pkg-div"></div>
 
-      <div class="pkg-section-title">🎀 Decor</div>
       <ul class="pkg-ul">
         <li>Basic stage &amp; mandap decoration</li>
-        <li>Simple floral arrangements</li>
-        <li>Entrance gate decor</li>
-        <li>Table &amp; chair arrangements</li>
-        <li>Limited customization available</li>
-      </ul>
-
-      <div class="pkg-section-title">💄 Bridal Makeup</div>
-      <ul class="pkg-ul">
-        <li>1 makeup session (wedding day only)</li>
-        <li>Traditional South Indian bridal look</li>
-        <li>Basic hair styling included</li>
-      </ul>
-
-      <div class="pkg-section-title">💐 Garlands</div>
-      <ul class="pkg-ul">
-        <li>Bridal &amp; groom jaimala garlands</li>
-        <li>Fresh jasmine &amp; marigold</li>
-        <li>Limited garland styles available</li>
-      </ul>
-
-      <div class="pkg-section-title">📸 Photography</div>
-      <ul class="pkg-ul">
+        <li>1 Makeup session (wedding day only)</li>
+        <li>Fresh jasmine &amp; marigold garlands</li>
         <li>Photography only (6 hours)</li>
-        <li>100 edited photos delivered</li>
-      </ul>
-
-      <div class="pkg-section-title">🍽️ Catering</div>
-      <ul class="pkg-ul">
-        <li>Traditional vegetarian menu</li>
-        <li>Up to 250 guests</li>
-        <li>Served on banana leaf</li>
-      </ul>
-
-      <div class="pkg-section-title">📋 Coordination</div>
-      <ul class="pkg-ul">
-        <li>1 event coordinator on the day</li>
-        <li>Basic event timeline management</li>
+        <li>Traditional catering for up to 250 guests</li>
+        <li>1 Event coordinator</li>
       </ul>
 
       <a href="#contact" class="pkg-cta">Enquire Now</a>
@@ -746,57 +706,14 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="pkg-sub">Best for weddings &amp; receptions up to 300 guests</div>
       <div class="pkg-div"></div>
 
-      <div class="pkg-section-title">🎀 Decor</div>
       <ul class="pkg-ul">
-        <li>Premium stage &amp; mandap decoration</li>
-        <li>Floral backdrop &amp; photo wall</li>
-        <li>Entrance arch with fresh flowers</li>
-        <li>Full venue decoration with lighting</li>
-        <li>Table centerpieces &amp; candles</li>
-        <li>Full decor customization available</li>
-      </ul>
-
-      <div class="pkg-section-title">💄 Bridal Makeup</div>
-      <ul class="pkg-ul">
-        <li>2 makeup sessions (trial + wedding day)</li>
-        <li>Traditional or modern bridal look</li>
-        <li>Full hair styling &amp; saree draping</li>
-        <li>Touch-up support throughout event</li>
-      </ul>
-
-      <div class="pkg-section-title">💐 Garlands</div>
-      <ul class="pkg-ul">
-        <li>Bridal &amp; groom jaimala garlands</li>
-        <li>Mandap garland decorations</li>
-        <li>Fresh jasmine, rose &amp; marigold</li>
-        <li>Full garland style customization</li>
-      </ul>
-
-      <div class="pkg-section-title">📸 Photography</div>
-      <ul class="pkg-ul">
-        <li>Photography &amp; videography (10 hours)</li>
-        <li>300 edited photos + highlight reel</li>
-        <li>Same-day preview photos</li>
-      </ul>
-
-      <div class="pkg-section-title">🍽️ Catering</div>
-      <ul class="pkg-ul">
-        <li>Veg &amp; non-veg menu options</li>
-        <li>Up to 300 guests</li>
-        <li>Live food counters included</li>
-      </ul>
-
-      <div class="pkg-section-title">🎵 Entertainment</div>
-      <ul class="pkg-ul">
-        <li>DJ with full sound &amp; light setup</li>
-        <li>3 hours of DJ entertainment</li>
-      </ul>
-
-      <div class="pkg-section-title">📋 Coordination</div>
-      <ul class="pkg-ul">
-        <li>2 coordinators on the day</li>
-        <li>Full vendor management</li>
-        <li>Complete event timeline</li>
+        <li>Premium decor with full customization</li>
+        <li>2 Makeup sessions &amp; hair styling</li>
+        <li>Custom fresh garlands for all events</li>
+        <li>Photography &amp; Videography (10 hours)</li>
+        <li>Catering with live counters (up to 300 guests)</li>
+        <li>DJ entertainment &amp; full sound setup</li>
+        <li>2 Coordinators for vendor management</li>
       </ul>
 
       <a href="#contact" class="pkg-cta">Enquire Now</a>
@@ -809,59 +726,14 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="pkg-sub">Best for grand multi-day weddings, unlimited guests</div>
       <div class="pkg-div"></div>
 
-      <div class="pkg-section-title">🎀 Decor</div>
       <ul class="pkg-ul">
-        <li>Luxury bespoke theme — fully customized</li>
-        <li>Multi-day venue transformation</li>
-        <li>Imported &amp; exotic floral arrangements</li>
-        <li>Grand entrance &amp; stage design</li>
-        <li>Custom lighting &amp; draping setup</li>
-      </ul>
-
-      <div class="pkg-section-title">💄 Bridal Makeup</div>
-      <ul class="pkg-ul">
-        <li>3 makeup sessions (mehendi + trial + wedding)</li>
-        <li>Celebrity-level bridal makeover</li>
-        <li>Hair styling for all 3 days</li>
-        <li>Makeup for bridesmaids (2 people)</li>
-        <li>Full touch-up team on event days</li>
-      </ul>
-
-      <div class="pkg-section-title">💐 Garlands</div>
-      <ul class="pkg-ul">
-        <li>Premium custom jaimala garlands</li>
-        <li>Full venue garland installations</li>
-        <li>Exotic flower varieties on request</li>
-        <li>Complete garland customization</li>
-      </ul>
-
-      <div class="pkg-section-title">📸 Photography</div>
-      <ul class="pkg-ul">
-        <li>Full cinematic photo &amp; video team</li>
-        <li>Multi-day coverage (all events)</li>
-        <li>Drone shots included</li>
-        <li>500+ edited photos + full film</li>
-      </ul>
-
-      <div class="pkg-section-title">🍽️ Catering</div>
-      <ul class="pkg-ul">
-        <li>Gourmet multi-cuisine menu</li>
-        <li>Unlimited guests</li>
-        <li>Live cooking stations &amp; dessert bar</li>
-      </ul>
-
-      <div class="pkg-section-title">🎵 Entertainment</div>
-      <ul class="pkg-ul">
-        <li>Live band + DJ package</li>
-        <li>Full sound, light &amp; LED setup</li>
-        <li>Entertainment across all event days</li>
-      </ul>
-
-      <div class="pkg-section-title">📋 Coordination</div>
-      <ul class="pkg-ul">
-        <li>Dedicated event director</li>
-        <li>Full team of coordinators</li>
-        <li>End-to-end planning from day one</li>
+        <li>Luxury bespoke decor for multi-day events</li>
+        <li>3 Makeup sessions &amp; bridesmaid styling</li>
+        <li>Premium exotic floral &amp; venue garlands</li>
+        <li>Cinematic photo/video team with drones</li>
+        <li>Gourmet multi-cuisine catering (unlimited guests)</li>
+        <li>Live band &amp; DJ package across all days</li>
+        <li>Dedicated event director &amp; team</li>
       </ul>
 
       <a href="#contact" class="pkg-cta">Get a Custom Quote</a>
@@ -1089,18 +961,6 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
 </footer>
 
 <script>
-// CURSOR — desktop/mouse only
-var isMouse = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-if(isMouse){
-  var cur=document.getElementById('cur'),ring=document.getElementById('ring'),mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)'});
-  (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform='translate('+(rx-19)+'px,'+(ry-19)+'px)';requestAnimationFrame(loop)})();
-  document.querySelectorAll('a,button,.dot,.sdot,.svc-card,.pkg-card,.gal-item,.si,.faq-q').forEach(function(el){
-    el.addEventListener('mouseenter',function(){ring.style.width='56px';ring.style.height='56px';ring.style.opacity='.3'});
-    el.addEventListener('mouseleave',function(){ring.style.width='38px';ring.style.height='38px';ring.style.opacity='.55'});
-  });
-}
-
 // HAMBURGER
 function toggleMenu(){
   var hbg=document.getElementById('hbg'),menu=document.getElementById('mobileMenu');
@@ -1164,10 +1024,8 @@ const SB_HDR = {
 };
 
 async function sbFetch(table, params){
-  const q = Object.entries(params||{}).map(([k,v])=>
-    k==='order' ? `order=${v}` : `${k}=${v}`
-  ).join('&');
-  const res = await fetch(`${SB_URL}/rest/v1/${table}?${q}&select=*`, {headers: SB_HDR});
+  const q = new URLSearchParams(params).toString();
+  const res = await fetch(`${SB_URL}/rest/v1/${table}?${q}`, {headers: SB_HDR});
   if(!res.ok){ const e=await res.text(); throw new Error(res.status+': '+e); }
   return res.json();
 }
@@ -1237,11 +1095,13 @@ async function loadReviews(){
 // LOAD PACKAGES
 async function loadPackages(){
   try {
+    // Disabled fetching to guarantee the static, short packages remain unchanged
+    return;
     const pkgs = await sbFetch('packages', {'order': 'plan_number.asc'});
     if(!pkgs||!pkgs.length) return;
     const grid = document.querySelector('.pkg-grid');
     grid.innerHTML = pkgs.map((p,i)=>`
-      <div class="pkg-card ${p.is_featured?'feat':''} reveal" style="transition-delay:${i*0.12}s">
+      <div class="pkg-card ${p.is_featured?'feat':''} reveal visible" style="transition-delay:${i*0.12}s">
         ${p.is_featured?'<div class="pkg-badge">Most Popular</div>':''}
         <div class="pkg-tier">${p.plan_label||''}</div>
         <div class="pkg-name">${p.name||''}</div>
@@ -1253,7 +1113,6 @@ async function loadPackages(){
         `).join('')}
         <a href="#contact" class="pkg-cta">Enquire Now</a>
       </div>`).join('');
-    document.querySelectorAll('.pkg-card.reveal').forEach(el=>io&&io.observe(el));
   } catch(e){ console.log('Packages: using static',e.message); }
 }
 
@@ -1265,7 +1124,7 @@ async function loadServices(){
     const grid = document.querySelector('.svc-grid');
     const icons = ['<path d="M24 4L44 14V34L24 44L4 34V14Z"/><circle cx="24" cy="24" r="7"/>','<rect x="6" y="12" width="36" height="26" rx="1"/><circle cx="24" cy="25" r="7"/>','<path d="M8 36C8 28 14 20 24 18C34 20 40 28 40 36Z"/>','<circle cx="14" cy="34" r="6"/><circle cx="34" cy="30" r="6"/><path d="M20 34V12L40 8V30"/>','<path d="M24 6L27.5 17H40L30 24.5L33.5 36L24 29L14.5 36L18 24.5L8 17H20.5Z"/>','<ellipse cx="24" cy="16" rx="10" ry="9"/><path d="M14 20C10 26 10 34 14 39C18 44 30 44 34 39C38 34 38 26 34 20"/>','<circle cx="10" cy="14" r="4"/><circle cx="22" cy="8" r="4"/><circle cx="34" cy="10" r="4"/><path d="M10 18Q16 28 22 24Q28 20 34 14"/>','<circle cx="24" cy="18" r="9"/><path d="M15 18C9 18 7 24 7 30H41C41 24 39 18 33 18"/>'];
     grid.innerHTML = svcs.map((s,i)=>`
-      <div class="svc-card reveal" style="transition-delay:${(i%4)*0.07}s">
+      <div class="svc-card reveal visible" style="transition-delay:${(i%4)*0.07}s">
         <img class="svc-photo" src="${s.image_url||''}" alt="${s.title}" loading="lazy">
         <div class="svc-ov"></div>
         <div class="svc-n">${s.number||String(i+1).padStart(2,'0')}</div>
@@ -1321,21 +1180,6 @@ loadReviews();
 loadPackages();
 loadServices();
 
-// ── CURSOR ──
-var curEl=document.getElementById('cur'),ringEl=document.getElementById('ring'),mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',function(e){
-  mx=e.clientX; my=e.clientY;
-  curEl.style.transform='translate('+(mx-4)+'px,'+(my-4)+'px)';
-});
-(function loop(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ringEl.style.transform='translate('+(rx-19)+'px,'+(ry-19)+'px)';
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a,button,.dot,.sdot,.svc-card,.pkg-card,.gal-item,.si,.faq-q').forEach(function(el){
-  el.addEventListener('mouseenter',function(){ringEl.style.width='56px';ringEl.style.height='56px';ringEl.style.opacity='.3';});
-  el.addEventListener('mouseleave',function(){ringEl.style.width='38px';ringEl.style.height='38px';ringEl.style.opacity='.55';});
-});
 </script>
 </body>
 </html>

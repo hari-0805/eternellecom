@@ -3,64 +3,35 @@
 <head><title>Supabase Test</title></head>
 <body style="font-family:monospace;padding:2rem;background:#111;color:#eee">
 <h2 style="color:#c9a96e">Supabase Connection Test</h2>
-<button onclick="testRead()" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer">Test READ</button>
-<button onclick="testWrite()" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer">Test WRITE</button>
-<button onclick="clearLog()" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer">Clear</button>
+<button onclick="testKey(ANON,'ANON KEY')" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer;background:#333;color:#eee;border:1px solid #555">Test ANON Key</button>
+<button onclick="testKey(PUB,'PUBLISHABLE KEY')" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer;background:#333;color:#eee;border:1px solid #555">Test Publishable Key</button>
+<button onclick="testWrite(ANON,'ANON')" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer;background:#333;color:#eee;border:1px solid #555">Write ANON</button>
+<button onclick="testWrite(PUB,'PUB')" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer;background:#333;color:#eee;border:1px solid #555">Write Publishable</button>
+<button onclick="clearLog()" style="padding:.5rem 1rem;margin:.5rem;cursor:pointer;background:#333;color:#eee;border:1px solid #555">Clear</button>
 <pre id="log" style="background:#222;padding:1rem;margin-top:1rem;min-height:200px;overflow:auto;font-size:.85rem"></pre>
-
 <script>
-const URL = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
-const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
-
-function log(msg, color){
-  const el = document.getElementById('log');
-  el.innerHTML += `<span style="color:${color||'#eee'}">${msg}</span>\n`;
+const URL  = 'https://jmxtlrytqrkzpxmevhrs.supabase.co';
+const ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpteHRscnl0cXJrenB4bWV2aHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1ODQyMjYsImV4cCI6MjA4OTE2MDIyNn0.amQDu9DASxEIPDLBZqccwtjYTQrGiLStVlJqmb2ENHk1';
+const PUB  = 'sb_publishable_8cBu--8bHfzK0aIJmCPIHg_q6Q2vAar';
+function log(msg,color){document.getElementById('log').innerHTML+=`<span style="color:${color||'#eee'}">${msg}</span>\n`;}
+function clearLog(){document.getElementById('log').innerHTML='';}
+async function testKey(key,name){
+  log('Testing READ with '+name+'...','#c9a96e');
+  try{
+    const res=await fetch(URL+'/rest/v1/contacts?limit=1',{headers:{'apikey':key,'Authorization':'Bearer '+key,'Content-Type':'application/json'}});
+    const text=await res.text();
+    log('Status: '+res.status,res.ok?'#55b855':'#e05555');
+    log('Response: '+text,res.ok?'#55b855':'#e05555');
+  }catch(e){log('ERROR: '+e.message,'#e05555');}
 }
-function clearLog(){ document.getElementById('log').innerHTML=''; }
-
-async function testRead(){
-  log('Testing READ from contacts table...', '#c9a96e');
-  try {
-    const res = await fetch(`${URL}/rest/v1/contacts?limit=1`, {
-      headers:{
-        'apikey': KEY,
-        'Authorization': 'Bearer ' + KEY,
-        'Content-Type': 'application/json'
-      }
-    });
-    const text = await res.text();
-    log(`Status: ${res.status}`, res.ok ? '#55b855' : '#e05555');
-    log(`Response: ${text}`, res.ok ? '#55b855' : '#e05555');
-  } catch(e){
-    log(`ERROR: ${e.message}`, '#e05555');
-  }
-}
-
-async function testWrite(){
-  log('Testing WRITE to contacts table...', '#c9a96e');
-  try {
-    const res = await fetch(`${URL}/rest/v1/contacts`, {
-      method: 'POST',
-      headers:{
-        'apikey': KEY,
-        'Authorization': 'Bearer ' + KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        your_name: 'Test User',
-        email: 'test@test.com',
-        message: 'This is a test submission',
-        is_read: false
-      })
-    });
-    const text = await res.text();
-    log(`Status: ${res.status}`, res.ok ? '#55b855' : '#e05555');
-    log(`Response: ${text||'(empty - success)'}`, res.ok ? '#55b855' : '#e05555');
-    if(res.ok) log('✓ SUCCESS! Check admin panel for this test entry.', '#55b855');
-  } catch(e){
-    log(`ERROR: ${e.message}`, '#e05555');
-  }
+async function testWrite(key,name){
+  log('Testing WRITE with '+name+'...','#c9a96e');
+  try{
+    const res=await fetch(URL+'/rest/v1/contacts',{method:'POST',headers:{'apikey':key,'Authorization':'Bearer '+key,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({your_name:'Test '+name,email:'test@test.com',message:'test',is_read:false})});
+    const text=await res.text();
+    log('Status: '+res.status,res.ok?'#55b855':'#e05555');
+    log('Response: '+(text||'(empty = success)'),res.ok?'#55b855':'#e05555');
+  }catch(e){log('ERROR: '+e.message,'#e05555');}
 }
 </script>
 </body>

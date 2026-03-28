@@ -97,7 +97,7 @@ nav.scrolled{background:rgba(26,20,16,.98)}
 .slide-dots{display:flex;justify-content:center;gap:.65rem;}
 .sdot{width:6px;height:6px;border-radius:50%;background:rgba(250,246,240,.32);transition:background .4s,transform .4s;cursor:none}
 .sdot.active{background:var(--gold);transform:scale(1.5)}
-.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:.4rem;pointer-events:none;}
+.scroll-hint{display:none;}
 .scroll-hint span{font-size:.6rem;letter-spacing:.38em;text-transform:uppercase;color:rgba(250,246,240,.55);white-space:nowrap}
 .sl-wrap{width:1px;height:40px;overflow:hidden}
 .sl-line{width:1px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDown 2s ease-in-out infinite}
@@ -141,7 +141,7 @@ h2 em{font-style:italic;color:var(--gold)}
 .svc-hd p{font-size:.92rem;line-height:2;color:rgba(250,246,240,.52);margin-top:1.3rem}
 .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;max-width:1340px;margin:0 auto}
 .svc-card{position:relative;overflow:hidden;cursor:none;aspect-ratio:3/4;min-height:360px}
-.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.65) saturate(.95)}
+.svc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s;filter:brightness(.75) saturate(.95)}
 .svc-card:hover .svc-photo{transform:scale(1.08);filter:brightness(.5) saturate(.85)}
 .svc-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,20,16,.95) 0%,rgba(26,20,16,.35) 55%,transparent 100%);transition:background .4s}
 .svc-card:hover .svc-ov{background:linear-gradient(to top,rgba(45,35,24,.98) 0%,rgba(26,20,16,.6) 65%,rgba(26,20,16,.18) 100%)}
@@ -214,20 +214,20 @@ h2 em{font-style:italic;color:var(--gold)}
 .pkg-bg{background:linear-gradient(135deg,var(--dark),var(--dark2))}
 .pkg-hd{text-align:center;margin-bottom:4.5rem}
 .pkg-hd p{font-size:.9rem;color:rgba(250,246,240,.5);max-width:420px;margin:1.2rem auto 0;line-height:2}
-.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1100px;margin:0 auto}
-.pkg-card{padding:3rem 2.3rem;background:rgba(26,20,16,.78);position:relative;overflow:hidden;transition:transform .35s;cursor:none}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1200px;margin:0 auto;align-items:start}
+.pkg-card{padding:2rem 1.8rem;background:rgba(26,20,16,.78);position:relative;overflow:hidden;transition:transform .35s;cursor:none}
 .pkg-card:hover{transform:translateY(-5px)}
 .pkg-card.feat{background:linear-gradient(135deg,rgba(201,169,110,.1),rgba(201,169,110,.04));border:1px solid rgba(201,169,110,.28)}
 .pkg-badge{position:absolute;top:1.6rem;right:1.6rem;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dark);background:var(--gold);padding:.25rem .7rem}
 .pkg-tier{font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
-.pkg-name{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:.35rem;color:var(--ivory)}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;margin-bottom:.25rem;color:var(--ivory)}
 .pkg-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:rgba(250,246,240,.42);margin-bottom:1.8rem;font-style:italic}
 .pkg-div{height:1px;background:rgba(201,169,110,.13);margin-bottom:1.7rem}
 .pkg-ul{list-style:none}
-.pkg-ul li{font-size:.8rem;padding:.6rem 0;color:rgba(250,246,240,.62);display:flex;align-items:center;gap:.7rem;border-bottom:1px solid rgba(196,154,122,.1)}
+.pkg-ul li{font-size:.76rem;padding:.4rem 0;color:rgba(250,246,240,.62);display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(196,154,122,.08)}
 .pkg-ul li::before{content:'◈';color:var(--gold);font-size:.5rem;flex-shrink:0}
-.pkg-section-title{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:1.2rem 0 .5rem;font-weight:400}
-.pkg-sub{font-size:.75rem;color:rgba(250,246,240,.42);margin-bottom:1.2rem;line-height:1.7;font-style:italic}
+.pkg-section-title{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:.8rem 0 .3rem;font-weight:400}
+.pkg-sub{font-size:.72rem;color:rgba(250,246,240,.42);margin-bottom:.8rem;line-height:1.6;font-style:italic}
 .pkg-cta{display:block;text-align:center;margin-top:2rem;padding:.9rem;border:1px solid rgba(201,169,110,.3);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:background .3s,color .3s}
 .pkg-cta:hover,.pkg-card.feat .pkg-cta{background:var(--gold);color:#fff0f0}
 
@@ -423,10 +423,6 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
   </div>
   <div class="hero-bottom">
     <div class="slide-dots" id="sdots"></div>
-    <div class="scroll-hint">
-      <span>DISCOVER</span>
-      <div class="sl-wrap"><div class="sl-line"></div></div>
-    </div>
   </div>
 </section>
 
@@ -499,7 +495,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       </div>
     </div>
     <div class="svc-card reveal" style="transition-delay:.21s">
-      <img class="svc-photo" src="images/svc-dj.jpg" alt="DJ" loading="lazy" style="object-position:center center;transform:scale(0.85);transform-origin:center">
+      <img class="svc-photo" src="images/svc-dj.jpg" alt="DJ" loading="lazy" style="object-position:center center;transform:scale(1);transform-origin:center;object-fit:cover">
       <div class="svc-ov"></div><div class="svc-n">04</div>
       <div class="svc-body">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="14" cy="34" r="6"/><circle cx="34" cy="30" r="6"/><circle cx="14" cy="34" r="2"/><circle cx="34" cy="30" r="2"/><path d="M20 34V12L40 8V30"/></svg>
@@ -575,7 +571,7 @@ footer{background:#100d09;padding:4.5rem 4rem 2.2rem}
       <div class="si-lbl"><div class="si-tag">Catering</div><div class="si-title">Food &amp; Catering</div></div>
     </div>
     <div class="si wide reveal" style="transition-delay:.25s">
-      <img src="images/show5.jpg" alt="DJ" loading="lazy">
+      <img src="images/show5.jpg" alt="DJ" loading="lazy" style="object-fit:cover;object-position:center">
       <div class="si-ov"></div>
       <div class="si-lbl"><div class="si-tag">DJ &amp; Music</div><div class="si-title">DJ Night</div></div>
     </div>
@@ -1168,8 +1164,10 @@ const SB_HDR = {
 };
 
 async function sbFetch(table, params){
-  const q = new URLSearchParams(params).toString();
-  const res = await fetch(`${SB_URL}/rest/v1/${table}?${q}`, {headers: SB_HDR});
+  const q = Object.entries(params||{}).map(([k,v])=>
+    k==='order' ? `order=${v}` : `${k}=${v}`
+  ).join('&');
+  const res = await fetch(`${SB_URL}/rest/v1/${table}?${q}&select=*`, {headers: SB_HDR});
   if(!res.ok){ const e=await res.text(); throw new Error(res.status+': '+e); }
   return res.json();
 }
